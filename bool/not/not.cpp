@@ -9,7 +9,7 @@ int main() {
     volatile bool result;  // 使用volatile防止编译器优化
 
     // 开始计时
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     // 多次执行NOT操作
     for (long long i = 0; i < numIterations; ++i) {
@@ -18,7 +18,7 @@ int main() {
     }
 
     // 结束计时
-    auto end = std::chrono::high_resolution_clock::now();
+    auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::micro> totalDuration = end - start;
 
     std::cout <<  totalDuration.count() / numIterations << std::endl;
