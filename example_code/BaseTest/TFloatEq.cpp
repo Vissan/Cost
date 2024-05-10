@@ -3,14 +3,17 @@
 #include <iostream>
 
 int main() {
-    const long long numIterations = 1000000;
-    float a = 42.0f, b = 42.0f;
+    const long long numIterations = 1;
+    volatile float a = 42.0f, b = 42.0f;
     volatile bool result;
+    volatile float valid = 0.0;
 
     auto start = std::chrono::steady_clock::now();
 
-    for (long long i = 0; i < numIterations; ++i) {
+    for (int i = 0; i < numIterations; ++i) {
         result = (a == b);
+        valid += a;
+        valid -= b;
     }
 
     auto end = std::chrono::steady_clock::now();
