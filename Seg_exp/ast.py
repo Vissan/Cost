@@ -27,7 +27,17 @@ STATEMENTS = {
     clang.cindex.CursorKind.VAR_DECL: 'letdata',  # 变量声明
     clang.cindex.CursorKind.COMPOUND_STMT: 'closure',  # 复合语句块
     clang.cindex.CursorKind.TEMPLATE_REF: 'templateMatch',  # 模板引用
-    # 添加其他需要统计的语句类型...
+    clang.cindex.CursorKind.CLASS_DECL: 'ClassDef',  # 类定义
+    clang.cindex.CursorKind.FOR_STMT: 'ForLoop',  # for 循环
+    clang.cindex.CursorKind.WHILE_STMT: 'WhileLoop',  # while 循环
+    clang.cindex.CursorKind.DO_STMT: 'DoWhileLoop',  # do-while 循环
+    clang.cindex.CursorKind.IF_STMT: 'IfStmt',  # if 语句
+    clang.cindex.CursorKind.CXX_TRY_STMT: 'TryBlock',  # try 块
+    clang.cindex.CursorKind.CXX_CATCH_STMT: 'CatchBlock',  # catch 块
+    clang.cindex.CursorKind.CXX_THROW_EXPR: 'ThrowExpr',  # throw 表达式
+    clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER: 'TemplateTypeParam',  # 模板类型参数
+    clang.cindex.CursorKind.TEMPLATE_NON_TYPE_PARAMETER: 'TemplateNonTypeParam',  # 模板非类型参数
+    clang.cindex.CursorKind.TEMPLATE_TEMPLATE_PARAMETER: 'TemplateTemplateParam',  # 模板模板参数
 }
 
 
