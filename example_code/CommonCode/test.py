@@ -1,0 +1,158 @@
+import os
+import subprocess
+import csv
+import time
+import clang.cindex
+from collections import defaultdict
+
+# 定义要统计的语句类型
+STATEMENTS = {
+    clang.cindex.CursorKind.FUNCTION_DECL: 'FunDef',  # 函数定义
+    clang.cindex.CursorKind.CALL_EXPR: 'FunApp',  # 函数调用
+    clang.cindex.CursorKind.LAMBDA_EXPR: 'letlambda',  # Lambda表达式
+    clang.cindex.CursorKind.BINARY_OPERATOR: {  # 二元操作符
+        '&&': 'BoolAnd',
+        '||': 'BoolOr',
+        '+': 'Add',
+        '-': 'Sub',
+        '*': 'Mult',
+        '/': 'Div',
+        '%': 'Mod',
+        '<': 'CondLT',
+        '<=': 'CondLE',
+        '>': 'CondGT',
+        '>=': 'CondGE',
+        '==': 'CondEq',
+        '!=': 'CondNE',
+    },
+    clang.cindex.CursorKind.FLOATING_LITERAL: 'FloatLiteral',  # 浮点数常量
+    clang.cindex.CursorKind.INTEGER_LITERAL: 'IntLiteral',  # 整数常量
+    clang.cindex.CursorKind.VAR_DECL: 'letdata',  # 变量声明
+    clang.cindex.CursorKind.COMPOUND_STMT: 'closure',  # 复合语句块
+    clang.cindex.CursorKind.TEMPLATE_REF: 'templateMatch',  # 模板引用
+    clang.cindex.CursorKind.CLASS_DECL: 'ClassDef',  # 类定义
+    clang.cindex.CursorKind.FOR_STMT: 'ForLoop',  # for 循环
+    clang.cindex.CursorKind.WHILE_STMT: 'WhileLoop',  # while 循环
+    clang.cindex.CursorKind.DO_STMT: 'DoWhileLoop',  # do-while 循环
+    clang.cindex.CursorKind.IF_STMT: 'IfStmt',  # if 语句
+    clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER: 'TemplateTypeParam',  # 模板类型参数
+    clang.cindex.CursorKind.TEMPLATE_NON_TYPE_PARAMETER: 'TemplateNonTypeParam',  # 模板非类型参数
+    clang.cindex.CursorKind.TEMPLATE_TEMPLATE_PARAMETER: 'TemplateTemplateParam',  # 模板模板参数
+}
+
+
+# 递归遍历AST并记录每种语句类型的数量
+def count_statements(node, counts):
+    if node.kind in STATEMENTS:
+        if isinstance(STATEMENTS[node.kind], str):
+            counts[STATEMENTS[node.kind]] += 1
+        elif isinstance(STATEMENTS[node.kind], dict):
+            if node.kind == clang.cindex.CursorKind.BINARY_OPERATOR or node.kind == clang.cindex.CursorKind.UNARY_OPERATOR:
+                operator = get_operator(node)
+                if operator in STATEMENTS[node.kind]:
+                    counts[STATEMENTS[node.kind][operator]] += 1
+            elif node.kind == clang.cindex.CursorKind.TYPE_REF:
+                for type_name, statement_type in STATEMENTS[node.kind].items():
+                    if type_name in node.displayname:
+                        counts[statement_type] += 1
+    for child in node.get_children():
+        count_statements(child, counts)
+
+
+# 获取操作符的类型
+def get_operator(node):
+    tokens = list(node.get_tokens())
+    if len(tokens) > 1:
+        return tokens[1].spelling  # 操作符通常是第二个token
+    return ""
+
+
+def compile_cpp_program(source_file, output_executable):
+    # Compile the C++ program with -O0 to avoid optimizations
+    compile_command = ["g++", "-O0", "-o", output_executable, source_file]
+    result = subprocess.run(compile_command, capture_output=True, text=True)
+
+    if result.returncode != 0:
+        print(f"Compilation failed with errors:\n{result.stderr}")
+        return False
+    else:
+        print(f"Compilation successful: {output_executable}")
+        return True
+
+
+def measure_execution_time(executable_path):
+    # Record the start time
+    start_time = time.time()
+
+    # Execute the C++ program
+    process = subprocess.Popen([executable_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    # Record the end time
+    end_time = time.time()
+
+    # Calculate the execution time
+    execution_time = end_time - start_time
+    return execution_time
+
+
+def main(directory_path, output_csv):
+    # 初始化Clang索引
+    clang.cindex.Config.set_library_file(r'C:\Program Files\LLVM\bin\libclang.dll')
+    index = clang.cindex.Index.create()
+
+    # 获取文件夹中的所有 .cpp 文件
+    cpp_files = [f for f in os.listdir(directory_path) if f.endswith('.cpp')]
+    cpp_files.sort()
+
+    # 创建CSV文件并写入标题行
+    with open(output_csv, mode='w', newline='') as file:
+        writer = csv.writer(file)
+
+        # 添加属性名称到第一行
+        attributes = []
+        for statement_type, value in STATEMENTS.items():
+            if isinstance(value, dict):
+                attributes.extend(value.values())
+            else:
+                attributes.append(value)
+        attributes.append('eTime')
+        writer.writerow(["Filename"] + attributes)
+
+        # 依次编译和执行每个 .cpp 文件，并记录结果
+        for cpp_file in cpp_files:
+            file_path = os.path.join(directory_path, cpp_file)
+            executable_path = os.path.splitext(file_path)[0]
+
+            # 初始化计数器
+            counts = defaultdict(int)
+
+            # 解析C++文件
+            translation_unit = index.parse(file_path)
+
+            # 遍历AST并统计语句
+            count_statements(translation_unit.cursor, counts)
+
+            if compile_cpp_program(file_path, executable_path):
+                execution_time = measure_execution_time(executable_path)
+            else:
+                execution_time = 'Compilation Failed'
+
+            # 添加计数值到CSV行
+            counts_row = []
+            for statement_type, value in STATEMENTS.items():
+                if isinstance(value, dict):
+                    for key in value.values():
+                        counts_row.append(counts.get(key, 0))
+                else:
+                    counts_row.append(counts.get(value, 0))
+            counts_row.append(execution_time)
+            writer.writerow([cpp_file] + counts_row)
+
+    print(f"Results written to {output_csv}")
+
+
+if __name__ == '__main__':
+    # 设置要处理的文件夹路径和输出CSV文件路径
+    directory_path = '/Users/vissan/PycharmProjects/Cost/example_code/CommonCode'
+    output_csv = 'execution_results.csv'
+    main(directory_path, output_csv)
