@@ -153,6 +153,6 @@ def main(directory_path, output_csv):
 
 if __name__ == '__main__':
     # 设置要处理的文件夹路径和输出CSV文件路径
-    directory_path = '/Users/vissan/PycharmProjects/Cost/example_code/CommonCode'
+    directory_path = 'C:/Users/scnuer/PycharmProjects/PREDICT-SPLINE/Cost/example_code/CommonCode'
     output_csv = 'execution_results.csv'
     main(directory_path, output_csv)

@@ -148,7 +148,7 @@ if __name__ == '__main__':
     # 设置libclang.dll的路径（假设Clang安装在C:\Program Files\LLVM）
     clang.cindex.Config.set_library_file(r'C:\Program Files\LLVM\bin\libclang.dll')
 
-    directory_path = 'CommonCode'
+    directory_path = r'C:\Users\scnuer\PycharmProjects\PREDICT-SPLINE\Cost\example_code\CommonCode'
     source_file = [f for f in os.listdir(directory_path) if f.endswith('.cpp')]
     output_executable = os.path.splitext(source_file)[0]
     main(source_file, output_executable)
