@@ -24,6 +24,10 @@ STATEMENTS = {
         '>=': 'CondGE',
         '==': 'CondEq',
         '!=': 'CondNE',
+        '&': 'BitAnd',
+        '|': 'BitOr',
+        '^': 'BitXor',
+        '~': 'BitNot',
     },
     clang.cindex.CursorKind.FLOATING_LITERAL: 'FloatLiteral',  # 浮点数常量
     clang.cindex.CursorKind.INTEGER_LITERAL: 'IntLiteral',  # 整数常量
@@ -35,11 +39,33 @@ STATEMENTS = {
     clang.cindex.CursorKind.WHILE_STMT: 'WhileLoop',  # while 循环
     clang.cindex.CursorKind.DO_STMT: 'DoWhileLoop',  # do-while 循环
     clang.cindex.CursorKind.IF_STMT: 'IfStmt',  # if 语句
+    clang.cindex.CursorKind.SWITCH_STMT: 'SwitchStmt',  # switch 语句
+    clang.cindex.CursorKind.CASE_STMT: 'CaseStmt',  # case 语句
+    clang.cindex.CursorKind.DEFAULT_STMT: 'DefaultStmt',  # default 语句
+    clang.cindex.CursorKind.ARRAY_SUBSCRIPT_EXPR: 'ArraySubscript',  # 数组下标
+    clang.cindex.CursorKind.CONDITIONAL_OPERATOR: 'TernaryOp',  # 三元操作符
+    clang.cindex.CursorKind.ARRAY_DECL: 'ArrayDecl',  # 数组声明
+    clang.cindex.CursorKind.FIELD_DECL: 'FieldDecl',  # 字段声明
+    clang.cindex.CursorKind.ENUM_CONSTANT_DECL: 'EnumConstantDecl',  # 枚举常量声明
+    clang.cindex.CursorKind.PARM_DECL: 'ParamDecl',  # 参数声明
+    clang.cindex.CursorKind.TYPEDEF_DECL: 'TypedefDecl',  # 类型定义
+    clang.cindex.CursorKind.STRUCT_DECL: 'StructDecl',  # 结构定义
+    clang.cindex.CursorKind.UNION_DECL: 'UnionDecl',  # 联合定义
+    clang.cindex.CursorKind.RETURN_STMT: 'ReturnStmt',  # 返回语句
+    clang.cindex.CursorKind.BREAK_STMT: 'BreakStmt',  # break 语句
+    clang.cindex.CursorKind.CONTINUE_STMT: 'ContinueStmt',  # continue 语句
+    clang.cindex.CursorKind.DECL_STMT: 'DeclStmt',  # 声明语句
+    clang.cindex.CursorKind.UNARY_OPERATOR: 'UnaryOperator',  # 一元操作符
+    clang.cindex.CursorKind.CHARACTER_LITERAL: 'CharLiteral',  # 字符常量
+    clang.cindex.CursorKind.STRING_LITERAL: 'StringLiteral',  # 字符串常量
+    clang.cindex.CursorKind.DECL_REF_EXPR: 'DeclRefExpr',  # 声明引用表达式
+    clang.cindex.CursorKind.MEMBER_REF_EXPR: 'MemberRefExpr',  # 成员引用表达式
+    clang.cindex.CursorKind.TRANSLATION_UNIT: 'TranslationUnit',  # 翻译单元
+    clang.cindex.CursorKind.NAMESPACE: 'Namespace',  # 命名空间
     clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER: 'TemplateTypeParam',  # 模板类型参数
     clang.cindex.CursorKind.TEMPLATE_NON_TYPE_PARAMETER: 'TemplateNonTypeParam',  # 模板非类型参数
     clang.cindex.CursorKind.TEMPLATE_TEMPLATE_PARAMETER: 'TemplateTemplateParam',  # 模板模板参数
 }
-
 
 # 递归遍历AST并记录每种语句类型的数量
 def count_statements(node, counts):
