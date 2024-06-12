@@ -43,7 +43,7 @@ void dummy_function(int a, int b, int c) {
 
 int main() {
     std::vector<int> numbers;
-    for (int i = 1; i <= 1000000; ++i) {
+    for (int i = 1; i <= 1000; ++i) {
         numbers.push_back(i);
     }
 
