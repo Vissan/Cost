@@ -55,7 +55,7 @@ void simple_sort_float(std::vector<double>& numbers) {
 int main() {
     std::vector<int> int_numbers;
     std::vector<double> float_numbers;
-    for (int i = 1; i <= 1000000; ++i) {
+    for (int i = 1; i <= 1000; ++i) {
         int_numbers.push_back(i);
         float_numbers.push_back(static_cast<double>(i) + 0.5);
     }

@@ -1,7 +1,7 @@
 import os
 
 # Define the path to the CodeForces directory
-directory_path = '/Users/vissan/PycharmProjects/Cost/example_code/CommonCode'
+directory_path = 'C:/Users/scnuer/PycharmProjects/PREDICT-SPLINE/Cost/example_code/CommonCode'
 
 # Get a list of all the .exe files in the directory
 exe_files = [f for f in os.listdir(directory_path) if f.endswith('.exe')]

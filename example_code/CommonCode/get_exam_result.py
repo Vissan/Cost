@@ -44,7 +44,7 @@ STATEMENTS = {
     clang.cindex.CursorKind.DEFAULT_STMT: 'DefaultStmt',  # default 语句
     clang.cindex.CursorKind.ARRAY_SUBSCRIPT_EXPR: 'ArraySubscript',  # 数组下标
     clang.cindex.CursorKind.CONDITIONAL_OPERATOR: 'TernaryOp',  # 三元操作符
-    clang.cindex.CursorKind.ARRAY_DECL: 'ArrayDecl',  # 数组声明
+    clang.cindex.CursorKind.ARRAY_SUBSCRIPT_EXPR: 'ArrayDecl',  # 数组声明
     clang.cindex.CursorKind.FIELD_DECL: 'FieldDecl',  # 字段声明
     clang.cindex.CursorKind.ENUM_CONSTANT_DECL: 'EnumConstantDecl',  # 枚举常量声明
     clang.cindex.CursorKind.PARM_DECL: 'ParamDecl',  # 参数声明

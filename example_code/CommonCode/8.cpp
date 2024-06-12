@@ -49,10 +49,10 @@ void modify_vector(std::vector<int>& numbers, int multiplier) {
 }
 
 int main() {
-    std::vector<int> int_numbers(1000000);
-    std::vector<double> float_numbers(1000000);
+    std::vector<int> int_numbers(1000);
+    std::vector<double> float_numbers(1000);
 
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         int_numbers[i] = i + 1;
         float_numbers[i] = static_cast<double>(i) + 0.5;
     }
