@@ -10,25 +10,7 @@ STATEMENTS = {
     clang.cindex.CursorKind.FUNCTION_DECL: 'FunDef',  # 函数定义
     clang.cindex.CursorKind.CALL_EXPR: 'FunApp',  # 函数调用
     clang.cindex.CursorKind.LAMBDA_EXPR: 'letlambda',  # Lambda表达式
-    clang.cindex.CursorKind.BINARY_OPERATOR: {  # 二元操作符
-        '&&': 'BoolAnd',
-        '||': 'BoolOr',
-        '+': 'Add',
-        '-': 'Sub',
-        '*': 'Mult',
-        '/': 'Div',
-        '%': 'Mod',
-        '<': 'CondLT',
-        '<=': 'CondLE',
-        '>': 'CondGT',
-        '>=': 'CondGE',
-        '==': 'CondEq',
-        '!=': 'CondNE',
-        '&': 'BitAnd',
-        '|': 'BitOr',
-        '^': 'BitXor',
-        '~': 'BitNot',
-    },
+    clang.cindex.CursorKind.BINARY_OPERATOR: 'BinaryOperator',  # 二元操作
     clang.cindex.CursorKind.FLOATING_LITERAL: 'FloatLiteral',  # 浮点数常量
     clang.cindex.CursorKind.INTEGER_LITERAL: 'IntLiteral',  # 整数常量
     clang.cindex.CursorKind.VAR_DECL: 'letdata',  # 变量声明
@@ -50,6 +32,9 @@ STATEMENTS = {
     clang.cindex.CursorKind.PARM_DECL: 'ParamDecl',  # 参数声明
     clang.cindex.CursorKind.TYPEDEF_DECL: 'TypedefDecl',  # 类型定义
     clang.cindex.CursorKind.STRUCT_DECL: 'StructDecl',  # 结构定义
+    clang.cindex.CursorKind.FLOATING_LITERAL: 'FloatDecl',  # 浮点常量
+    clang.cindex.CursorKind.INTEGER_LITERAL: 'IntegerDecl',  # 整形常量
+    clang.cindex.CursorKind.CXX_NULL_PTR_LITERAL_EXPR: 'PtrDecl',  # Point Type
     clang.cindex.CursorKind.UNION_DECL: 'UnionDecl',  # 联合定义
     clang.cindex.CursorKind.RETURN_STMT: 'ReturnStmt',  # 返回语句
     clang.cindex.CursorKind.BREAK_STMT: 'BreakStmt',  # break 语句
@@ -65,7 +50,11 @@ STATEMENTS = {
     clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER: 'TemplateTypeParam',  # 模板类型参数
     clang.cindex.CursorKind.TEMPLATE_NON_TYPE_PARAMETER: 'TemplateNonTypeParam',  # 模板非类型参数
     clang.cindex.CursorKind.TEMPLATE_TEMPLATE_PARAMETER: 'TemplateTemplateParam',  # 模板模板参数
+    clang.cindex.CursorKind.UNEXPOSED_DECL: 'UnexpoesdDecl',  # UnexpoesedDecl
+    clang.cindex.CursorKind.CXX_NEW_EXPR: 'NewOp',  # new op
+    clang.cindex.CursorKind.CXX_DELETE_EXPR: 'DelOp',  # Delete op
 }
+
 
 # 递归遍历AST并记录每种语句类型的数量
 def count_statements(node, counts):
