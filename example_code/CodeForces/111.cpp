@@ -1,26 +1,22 @@
-//4238335   Aug 7, 2013 5:09:13 AM	fuwutu	 257A - Sockets	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <cstdio>
+//4264440   Aug 11, 2013 11:04:58 AM	fuwutu	 322B - Ciel and Flowers	 GNU C++0x	Accepted	 62 ms	 0 KB
+#include <iostream>
 #include <algorithm>
-#include <functional>
 
 using namespace std;
 
 int main()
 {
-    int n, m, k, a[50];
-    scanf("%d%d%d", &n, &m, &k);
-    for (int i = 0; i < n; ++i)
-    {
-        scanf("%d", &a[i]);
-    }
+    unsigned r, g, b;
+    cin >> r >> g >> b;
 
-    sort(a, a + n, greater<int>());
-    int filters(0), plug(k);
-    while (filters < n && plug < m)
+    unsigned R(r % 3), G(g % 3), B(b % 3);
+    unsigned amount(r / 3 + g / 3 + b / 3 + min(R, min(G, B)));
+    if (   R == 2 && G == 2 && B == 0 && b != 0
+        || G == 2 && B == 2 && R == 0 && r != 0
+        || B == 2 && R == 2 && G == 0 && g != 0)
     {
-        plug += a[filters] - 1;
-        filters += 1;
+        amount += 1;
     }
-    printf("%d\n", plug >= m ? filters : -1);
+    cout << amount << endl;
     return 0;
 }

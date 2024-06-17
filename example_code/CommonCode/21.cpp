@@ -1,64 +1,34 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <string>
+、#include <cstdio>
 
-// 防止编译器优化
-volatile long long sum;
-volatile double float_sum;
+int main()
+{
+    int n = 3; // Example number of rows
+    int m = 3; // Example number of columns
+    char c[12][13] = {
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // Padding for 1-based index
+        {' ', 'P', 'W', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', 'W', 'P', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', 'P', 'W', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+    };
 
-
-void array_sum(const int* arr, int size) {
-    for (int i = 0; i < size; ++i) {
-        sum += arr[i];
-    }
-}
-
-void matrix_operations() {
-    int matrix[3][3];
-    int counter = 1;
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            matrix[i][j] = counter++;
+    int eaten = 0;
+    for (int i = 1; i <= n; ++i)
+    {
+        for (int j = 1; j <= m; ++j)
+        {
+            if (c[i][j] == 'W')
+            {
+                if (c[i-1][j] == 'P' || c[i+1][j] == 'P' || c[i][j-1] == 'P' || c[i][j+1] == 'P')
+                {
+                    eaten += 1;
+                    c[i][j] = '.'; // Mark the wolf as having eaten a pig
+                }
+            }
         }
     }
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            sum += matrix[i][j];
-        }
-    }
-}
 
-void boolean_operations(bool a, bool b) {
-    if (a && b) {
-        sum += 1;
-    } else if (a || b) {
-        sum += 2;
-    } else {
-        sum += 3;
-    }
-}
-
-int main() {
-    std::vector<int> int_numbers(100);
-    std::vector<double> float_numbers(100);
-
-    for (int i = 0; i < 100; ++i) {
-        int_numbers[i] = i + 1;
-        float_numbers[i] = static_cast<double>(i) + 0.5;
-    }
-
-    sum = 0;
-    float_sum = 0.0;
-
-
-    int a = 10, b = 20;
-
-    int arr[5] = {1, 2, 3, 4, 5};
-    array_sum(arr, 5);
-
-    matrix_operations();
-    boolean_operations(true, false);
+    // Now you can use the variable 'eaten' as needed in your program
+    // eaten holds the number of pigs eaten by wolves
 
     return 0;
 }

@@ -1,29 +1,37 @@
-//4034892   Jul 7, 2013 5:15:08 PM	fuwutu	 25A - IQ test	 GNU C++0x	Accepted	15 ms	0 KB
+//4172001     Jul 27, 2013 4:19:28 AM 	fuwutu 	330A - Cakeminator 	GNU C++0x 	Accepted 	30 ms 	0 KB
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n, x, even(0), lastodd(0), lasteven(0);
-    cin >> n;
-
-    for (int i = 1; i <= n; ++i)
+    int r, c, row[11] = {0}, col[11] ={0};
+    string s;
+    cin >> r >> c;
+    for (int i = 0; i < r; ++i)
     {
-        cin >> x;
-        if (x % 2 == 0)
+        cin >> s;
+        for (int j = 0; j < c; ++j)
         {
-            even += 1;
-            lasteven = i;
-        }
-        else
-        {
-            even -= 1;
-            lastodd = i;
+            if (s[j] == 'S')
+            {
+                row[i] = 1;
+                col[j] = 1;
+            }
         }
     }
-
-    cout << (even > 0 ? lastodd : lasteven) << endl;
-
+    int cakes(0);
+    for (int i = 0; i < r; ++i)
+    {
+        for (int j = 0; j < c; ++j)
+        {
+            if (row[i] == 0 || col[j] == 0)
+            {
+                cakes += 1;
+            }
+        }
+    }
+    cout << cakes << endl;
     return 0;
 }

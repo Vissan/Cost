@@ -1,32 +1,27 @@
-//4057739   Jul 13, 2013 7:54:54 AM	fuwutu	 327A - Flipping Game	 GNU C++0x	Accepted	15 ms	0 KB
+//4057519   Jul 13, 2013 6:52:47 AM	fuwutu	 245A - System Administrator	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    int n, a, count1(0), extra0(0), extra0max(-1);
+    int n, t, x, y, xa(0), ya(0), xb(0), yb(0);
     cin >> n;
     while (n--)
     {
-        cin >> a;
-        if (a == 1)
+        cin >> t >> x >> y;
+        if (t == 1)
         {
-            count1 += 1;
-            if (extra0 > 0)
-            {
-                extra0 -= 1;
-            }
+            xa += x;
+            ya += y;
         }
         else
         {
-            extra0 += 1;
-            if (extra0 > extra0max)
-            {
-                extra0max = extra0;
-            }
+            xb += x;
+            yb += y;
         }
     }
-    cout << count1 + extra0max << endl;
+    cout << (xa >= ya ? "LIVE" : "DEAD") << endl;
+    cout << (xb >= yb ? "LIVE" : "DEAD") << endl;
     return 0;
 }

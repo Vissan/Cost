@@ -1,22 +1,18 @@
-//4205110   Jul 30, 2013 8:14:07 PM	fuwutu	 68A - Irrational problem	 GNU C++0x	Accepted	30 ms	0 KB
+//4006999   Jul 3, 2013 6:34:23 PM	fuwutu	 112A - Petya and Strings	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
+#include <string>
+#include <cctype>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 
 int main()
 {
-    int p[4], a, b;
-    cin >> p[0] >> p[1] >> p[2] >> p[3] >> a >> b;
-
-    int m = *min_element(p, p + 4);
-    if (a < m)
-    {
-        cout << min(b, m - 1) - a + 1 << endl;
-    }
-    else
-    {
-        cout << 0 << endl;
-    }
+    string s1, s2;
+    cin >> s1 >> s2;
+    transform(s1.begin(), s1.end(), s1.begin(), ::tolower);
+    transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
+    cout << strcmp(s1.c_str(), s2.c_str()) << endl;
     return 0;
 }

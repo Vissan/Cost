@@ -1,30 +1,23 @@
-//4225560   Aug 4, 2013 5:26:26 AM	fuwutu	 B - Road Construction	 GNU C++0x	Accepted	30 ms	0 KB
-#include <cstdio>
+//4033438   Jul 7, 2013 10:40:48 AM	fuwutu	 246A - Buggy Sorting	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, m, a, b;
-    bool fire[1001] = {false};
-    scanf("%d%d", &n, &m);
-    while (m--)
+    int n;
+    cin >> n;
+    if (n > 2)
     {
-        scanf("%d%d", &a, &b);
-        fire[a] = true;
-        fire[b] = true;
+        for (int i = 2; i <= n; ++i)
+        {
+            cout << i << " ";
+        }
+        cout << 1 << endl;
     }
-    int x = 1;
-    while (fire[x])
+    else
     {
-        x++;
-    }
-    printf("%d\n", n - 1);
-    for (int i = 1; i < x; ++i)
-    {
-        printf("%d %d\n", i, x);
-    }
-    for (int i = x + 1; i <= n; ++i)
-    {
-        printf("%d %d\n", x, i);
+        cout << -1 << endl;
     }
     return 0;
 }

@@ -1,28 +1,30 @@
-//4076484   Jul 15, 2013 7:47:42 PM	fuwutu	 260A - Adding Digits	 GNU C++0x	Accepted	15 ms	100 KB
-#include <iostream>
-#include <string>
-
-using namespace std;
+//4225560   Aug 4, 2013 5:26:26 AM	fuwutu	 B - Road Construction	 GNU C++0x	Accepted	30 ms	0 KB
+#include <cstdio>
 
 int main()
 {
-    int a, b, n;
-    cin >> a >> b >> n;
-    bool exist(false);
-    for (int i = 0; i < 10; ++i)
+    int n, m, a, b;
+    bool fire[1001] = {false};
+    scanf("%d%d", &n, &m);
+    while (m--)
     {
-        if ((a * 10 + i) % b == 0)
-        {
-            cout << a * 10 + i;
-            string s(n - 1, '0');
-            cout << s << endl;
-            exist = true;
-            break;
-        }
+        scanf("%d%d", &a, &b);
+        fire[a] = true;
+        fire[b] = true;
     }
-    if (!exist)
+    int x = 1;
+    while (fire[x])
     {
-        cout << -1 << endl;
+        x++;
+    }
+    printf("%d\n", n - 1);
+    for (int i = 1; i < x; ++i)
+    {
+        printf("%d %d\n", i, x);
+    }
+    for (int i = x + 1; i <= n; ++i)
+    {
+        printf("%d %d\n", x, i);
     }
     return 0;
 }

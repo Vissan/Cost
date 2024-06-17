@@ -1,36 +1,31 @@
-//4057462   Jul 13, 2013 6:34:24 AM	fuwutu	 320A - Magic Numbers	 GNU C++0x	Accepted	 15 ms	 0 KB
 #include <iostream>
 
 using namespace std;
 
+long long C(int n, int m)
+{
+    long long result = 1;
+    for (int i = 0; i < m; ++i)
+    {
+        result *= (n - i);
+        result /= (i + 1);
+    }
+    return result;
+}
+
 int main()
 {
-    int n, state(0);
-    cin >> n;
+    int n = 5; // Example number of boys
+    int m = 4; // Example number of girls
+    int t = 7; // Example number of people in the theatre
 
-    bool magic(true);
-    while (n != 0)
+    long long ways = 0;
+    for (int i = 4; i <= t - 1; ++i)
     {
-        int d = n % 10;
-        n /= 10;
+        ways += C(n, i) * C(m, t - i);
+    }
 
-        if (d == 1)
-        {
-            state = 0;
-        }
-        else if (d == 4 && state < 2)
-        {
-            state = state + 1;
-        }
-        else
-        {
-            magic = false;
-        }
-    }
-    if (state != 0)
-    {
-        magic = false;
-    }
-    cout << (magic ? "YES" : "NO") << endl;
+    // Now you can use the 'ways' variable as needed in your program
+
     return 0;
 }

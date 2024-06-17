@@ -1,4 +1,4 @@
-//4052601   Jul 12, 2013 3:50:47 AM	fuwutu	 296A - Yaroslav and Permutations	 GNU C++0x	Accepted	15 ms	0 KB
+//4205110   Jul 30, 2013 8:14:07 PM	fuwutu	 68A - Irrational problem	 GNU C++0x	Accepted	30 ms	0 KB
 #include <iostream>
 #include <algorithm>
 
@@ -6,29 +6,17 @@ using namespace std;
 
 int main()
 {
-    int n, a[100];
-    cin >> n;
-    for (int i = 0; i < n; ++i)
+    int p[4], a, b;
+    cin >> p[0] >> p[1] >> p[2] >> p[3] >> a >> b;
+
+    int m = *min_element(p, p + 4);
+    if (a < m)
     {
-        cin >> a[i];
+        cout << min(b, m - 1) - a + 1 << endl;
     }
-    sort(a, a + n);
-    int continuous(1), max_continuous(1);
-    for (int i = 1; i < n; ++i)
+    else
     {
-        if (a[i] == a[i-1])
-        {
-            continuous += 1;
-            if (continuous > max_continuous)
-            {
-                max_continuous = continuous;
-            }
-        }
-        else
-        {
-            continuous = 1;
-        }
+        cout << 0 << endl;
     }
-    cout << (max_continuous <= (n + 1) / 2 ? "YES" : "NO") << endl;
     return 0;
 }

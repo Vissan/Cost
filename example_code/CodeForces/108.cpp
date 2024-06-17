@@ -1,93 +1,38 @@
-//4304346	 Aug 17, 2013 7:38:25 PM	fuwutu	 254A - Cards with Numbers	 GNU C++0x	Accepted	530 ms	4800 KB
+//4265591   Aug 11, 2013 3:43:45 PM	fuwutu	 31A - Worms Evolution	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <cstdio>
-#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-
-    int n;
+    int n, a[101];
     scanf("%d", &n);
-
-    pair<int, int>* x = new pair<int, int>[n * 2];
-    for (int i = 0; i < n * 2; ++i)
+    for (int i = 1; i <= n; ++i)
     {
-        scanf("%d", &x[i].first);
-        x[i].second = i + 1;
+        scanf("%d", &a[i]);
     }
 
-    sort(x, x + n * 2);
-    bool possible = true;
-    for (int i = 0; i < n * 2; i += 2)
+    bool found = false;
+    for (int i = 1; !found && i <= n; ++i)
     {
-        if (x[i].first != x[i+1].first)
+        for (int j = 1; !found && j <= n; ++j)
         {
-            possible = false;
-            break;
-        }
-    }
-
-    if (possible)
-    {
-        for (int i = 0; i < n * 2; i += 2)
-        {
-            printf("%d %d\n", x[i].second, x[i+1].second);
-        }
-    }
-    else
-    {
-        printf("-1\n");
-    }
-
-    delete[] x;
-    return 0;
-}
-
-
-//4304381	 Aug 17, 2013 7:46:43 PM	fuwutu	 254A - Cards with Numbers	 GNU C++0x	Accepted	404 ms	6900 KB
-#include <cstdio>
-#include <vector>
-
-using namespace std;
-
-int main()
-{
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-
-    int n, a;
-    vector<int> index[5001];
-    scanf("%d", &n);
-    for (int i = 1; i <= n * 2; ++i)
-    {
-        scanf("%d", &a);
-        index[a].push_back(i);
-    }
-
-    bool possible = true;
-    for (int i = 1; i < 5001; ++i)
-    {
-        if (index[i].size() % 2 == 1)
-        {
-            possible = false;
-            break;
-        }
-    }
-
-    if (possible)
-    {
-        for (int i = 1; i < 5001; ++i)
-        {
-            for (size_t j = 0; j < index[i].size(); j += 2)
+            if (j != i)
             {
-                printf("%d %d\n", index[i][j], index[i][j+1]);
+                for (int k = j + 1; k <= n; ++k)
+                {
+                    if (k != i && a[i] == a[j] + a[k])
+                    {
+                        printf("%d %d %d\n", i, j, k);
+                        found = true;
+                        break;
+                    }
+                }
             }
         }
     }
-    else
+
+    if (!found)
     {
         printf("-1\n");
     }

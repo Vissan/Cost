@@ -1,52 +1,37 @@
-//4172301   Jul 27, 2013 5:23:55 AM	fuwutu	 63A - Sinking Ship	 GNU C++0x	Accepted	30 ms	100 KB
-#include <iostream>
-#include <string>
-#include <vector>
+//4306317	 Aug 18, 2013 6:33:43 AM	fuwutu	 276C - Little Girl and Maximum Sum	 GNU C++0x	Accepted	218 ms	1500 KB
+#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
+int a[200000], c[200001] = {0};
+
 int main()
 {
-    int n;
-    cin >> n;
+    int n, q, l, r;
+    scanf("%d%d", &n, &q);
+    for (int i = 0; i < n; ++i)
+    {
+        scanf("%d", &a[i]);
+    }
+    while (q--)
+    {
+        scanf("%d%d", &l, &r);
+        c[l-1] += 1;
+        c[r] -= 1;
+    }
+    for (int i = 1; i < n; ++i)
+    {
+        c[i] += c[i-1];
+    }
 
-    string name, status;
-    vector<string> rats, womenandchildren, men, captain;
-    while (n--)
+    sort(a, a + n);
+    sort(c, c + n);
+    long long answer = 0;
+    for (int i = 0; i < n; ++i)
     {
-        cin >> name >> status;
-        if (status == "rat")
-        {
-            rats.push_back(name);
-        }
-        else if (status == "woman" || status == "child")
-        {
-            womenandchildren.push_back(name);
-        }
-        else if (status == "man")
-        {
-            men.push_back(name);
-        }
-        else
-        {
-            captain.push_back(name);
-        }
+        answer += static_cast<long long>(a[i]) * static_cast<long long>(c[i]);
     }
-    for (auto one : rats)
-    {
-        cout << one << endl;
-    }
-    for (auto one : womenandchildren)
-    {
-        cout << one << endl;
-    }
-    for (auto one : men)
-    {
-        cout << one << endl;
-    }
-    for (auto one : captain)
-    {
-        cout << one << endl;
-    }
+    printf("%I64d\n", answer);
     return 0;
 }

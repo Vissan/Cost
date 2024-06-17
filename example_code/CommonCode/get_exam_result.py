@@ -11,8 +11,6 @@ STATEMENTS = {
     clang.cindex.CursorKind.CALL_EXPR: 'FunApp',  # 函数调用
     clang.cindex.CursorKind.LAMBDA_EXPR: 'letlambda',  # Lambda表达式
     clang.cindex.CursorKind.BINARY_OPERATOR: 'BinaryOperator',  # 二元操作
-    clang.cindex.CursorKind.FLOATING_LITERAL: 'FloatLiteral',  # 浮点数常量
-    clang.cindex.CursorKind.INTEGER_LITERAL: 'IntLiteral',  # 整数常量
     clang.cindex.CursorKind.VAR_DECL: 'letdata',  # 变量声明
     clang.cindex.CursorKind.COMPOUND_STMT: 'closure',  # 复合语句块
     clang.cindex.CursorKind.TEMPLATE_REF: 'templateMatch',  # 模板引用
@@ -24,7 +22,6 @@ STATEMENTS = {
     clang.cindex.CursorKind.SWITCH_STMT: 'SwitchStmt',  # switch 语句
     clang.cindex.CursorKind.CASE_STMT: 'CaseStmt',  # case 语句
     clang.cindex.CursorKind.DEFAULT_STMT: 'DefaultStmt',  # default 语句
-    clang.cindex.CursorKind.ARRAY_SUBSCRIPT_EXPR: 'ArraySubscript',  # 数组下标
     clang.cindex.CursorKind.CONDITIONAL_OPERATOR: 'TernaryOp',  # 三元操作符
     clang.cindex.CursorKind.ARRAY_SUBSCRIPT_EXPR: 'ArrayDecl',  # 数组声明
     clang.cindex.CursorKind.FIELD_DECL: 'FieldDecl',  # 字段声明
@@ -53,6 +50,8 @@ STATEMENTS = {
     clang.cindex.CursorKind.UNEXPOSED_DECL: 'UnexpoesdDecl',  # UnexpoesedDecl
     clang.cindex.CursorKind.CXX_NEW_EXPR: 'NewOp',  # new op
     clang.cindex.CursorKind.CXX_DELETE_EXPR: 'DelOp',  # Delete op
+    clang.cindex.CursorKind.CXX_STATIC_CAST_EXPR: 'Static_Cast<>',  # cast
+    clang.cindex.CursorKind.CXX_BOOL_LITERAL_EXPR: 'BoolLiteral',
 }
 
 

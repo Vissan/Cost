@@ -1,41 +1,16 @@
-//4265591   Aug 11, 2013 3:43:45 PM	fuwutu	 31A - Worms Evolution	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <cstdio>
+//4205051   Jul 30, 2013 7:59:44 PM	fuwutu	 9A - Die Roll	 GNU C++0x	Accepted	30 ms	0 KB
+#include <iostream>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n, a[101];
-    scanf("%d", &n);
-    for (int i = 1; i <= n; ++i)
-    {
-        scanf("%d", &a[i]);
-    }
+    int Y, W;
+    cin >> Y >> W;
 
-    bool found = false;
-    for (int i = 1; !found && i <= n; ++i)
-    {
-        for (int j = 1; !found && j <= n; ++j)
-        {
-            if (j != i)
-            {
-                for (int k = j + 1; k <= n; ++k)
-                {
-                    if (k != i && a[i] == a[j] + a[k])
-                    {
-                        printf("%d %d %d\n", i, j, k);
-                        found = true;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    if (!found)
-    {
-        printf("-1\n");
-    }
-
+    const string probability[7] = {"", "1/1", "5/6", "2/3", "1/2", "1/3", "1/6"};
+    int D = max(Y, W);
+    cout << probability[D] << endl;
     return 0;
 }

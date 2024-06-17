@@ -1,28 +1,23 @@
-//4263357   Aug 11, 2013 5:15:57 AM 	fuwutu 	34B - Sale 	GNU C++0x 	Accepted 	30 ms 	0 KB
-#include <iostream>
-#include <algorithm>
-
-using namespace std;
+//4240194   Aug 7, 2013 4:26:51 PM	fuwutu	 108A - Palindromic Times	 GNU C++0x	Accepted	 30 ms	 0 KB
+#include <cstdio>
 
 int main()
 {
-    int n, m, a[100];
-    cin >> n >> m;
-    for (int i = 0; i < n; ++i)
+    int hh, mm;
+    scanf("%d:%d", &hh, &mm);
+    do 
     {
-        cin >> a[i];
-    }
-    sort(a, a + n);
-
-    int s(0);
-    for (int i = 0; i < m; ++i)
-    {
-        if (a[i] >= 0)
+        ++mm;
+        if (mm == 60)
         {
-            break;
+            ++hh;
+            mm = 0;
         }
-        s += a[i];
-    }
-    cout << -s << endl;
+        if (hh == 24)
+        {
+            hh = 0;
+        }
+    } while (hh % 10 * 10 + hh / 10 != mm);
+    printf("%02d:%02d\n", hh, mm);
     return 0;
 }

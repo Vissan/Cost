@@ -1,37 +1,26 @@
-//4172001     Jul 27, 2013 4:19:28 AM 	fuwutu 	330A - Cakeminator 	GNU C++0x 	Accepted 	30 ms 	0 KB
-#include <iostream>
-#include <string>
+//4235509   Aug 6, 2013 9:00:31 AM	fuwutu	 106A - Card Game	 GNU C++0x	Accepted	 62 ms	 0 KB
+#include <cstdio>
 
 using namespace std;
 
+int rank(char c)
+{
+    const char* order = "6789TJQKA";
+    char* find = const_cast<char*>(order);
+    while (*find != c)
+    {
+        ++find;
+    }
+    return find - order;
+}
+
 int main()
 {
-    int r, c, row[11] = {0}, col[11] ={0};
-    string s;
-    cin >> r >> c;
-    for (int i = 0; i < r; ++i)
-    {
-        cin >> s;
-        for (int j = 0; j < c; ++j)
-        {
-            if (s[j] == 'S')
-            {
-                row[i] = 1;
-                col[j] = 1;
-            }
-        }
-    }
-    int cakes(0);
-    for (int i = 0; i < r; ++i)
-    {
-        for (int j = 0; j < c; ++j)
-        {
-            if (row[i] == 0 || col[j] == 0)
-            {
-                cakes += 1;
-            }
-        }
-    }
-    cout << cakes << endl;
+    char suit[2], card1[3], card2[3];
+    scanf("%s%s%s", suit, card1, card2);
+
+    bool beat = (card1[1] == suit[0] && card2[1] != suit[0])
+        || (card1[1] == card2[1] && rank(card1[0]) > rank(card2[0]));
+    printf(beat ? "YES\n" : "NO\n");
     return 0;
 }

@@ -1,4 +1,4 @@
-//4033968   Jul 7, 2013 12:59:41 PM	fuwutu	 262A - Roma and Lucky Numbers	 GNU C++0x	Accepted	15 ms	0 KB
+//4236727   Aug 6, 2013 3:44:49 PM	fuwutu	 332A - Down the Hatch!	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <iostream>
 #include <string>
 
@@ -6,26 +6,16 @@ using namespace std;
 
 int main()
 {
-    int n, k, count(0);
-    cin >> n >> k;
-
+    int n, glasses(0);
     string s;
-    while (n--)
+    cin >> n >> s;
+    for (int i = n; i < s.length(); i += n)
     {
-        int lucky(0);
-        cin >> s;
-        for (size_t i = 0; i < s.length(); ++i)
+        if (s[i-1] == s[i-2] && s[i-2] == s[i-3])
         {
-            if (s[i] == '4' || s[i] == '7')
-            {
-                lucky += 1;
-            }
-        }
-        if (lucky <= k)
-        {
-            count += 1;
+            ++glasses;
         }
     }
-    cout << count << endl;
+    cout << glasses << endl;
     return 0;
 }

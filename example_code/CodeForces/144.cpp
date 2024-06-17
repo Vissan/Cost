@@ -1,27 +1,22 @@
-//4058602   Jul 13, 2013 12:18:22 PM	fuwutu	 282B - Painting Eggs	 GNU C++0x	Accepted	484 ms	0 KB
-#include <cstdio>
+//4136831   Jul 22, 2013 9:10:08 PM	fuwutu	 46A - Ball Game	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, a, g;
-    scanf("%d", &n);
-
-    int A(0);
-    while (n--)
+    int n, c(2);
+    cin >> n;
+    cout << c;
+    for (int i = 2; i < n; ++i)
     {
-        scanf("%d%d", &a, &g);
-        A += a;
-        if (A <= 500)
+        c += i;
+        if (c > n)
         {
-            printf("A");
+            c -= n;
         }
-        else
-        {
-            A -= 1000;
-            printf("G");
-        }
+        cout << " " << c;
     }
-    printf("\n");
-
+    cout << endl;
     return 0;
 }

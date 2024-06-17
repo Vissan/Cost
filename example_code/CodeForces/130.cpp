@@ -1,23 +1,19 @@
-//4189214   Jul 27, 2013 5:01:04 PM	fuwutu	 270B - Multithreading	 GNU C++0x	Accepted	30 ms	0 KB
+//4362875	 Aug 28, 2013 7:34:17 PM	fuwutu	 339B - Xenia and Ringroad	 GNU C++0x	Accepted	62 ms	0 KB
 #include <cstdio>
 
 int main()
 {
-    int n, a0, a, ascending(1);
-    scanf("%d%d", &n, &a0);
-    for (int i = 1; i < n; ++i)
+    int n, m, a0, a, cycle = 0;
+    scanf("%d%d%d", &n, &m, &a0);
+    while (--m)
     {
         scanf("%d", &a);
-        if (a > a0)
+        if (a0 > a)
         {
-            ascending  += 1;
-        }
-        else
-        {
-            ascending = 1;
+            cycle += 1;
         }
         a0 = a;
     }
-    printf("%d\n", n - ascending);
+    printf("%I64d\n", static_cast<long long>(n) * static_cast<long long>(cycle) + a0 - 1);
     return 0;
 }

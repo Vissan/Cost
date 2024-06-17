@@ -1,44 +1,21 @@
-//4231314   Aug 5, 2013 9:18:30 AM  fuwutu  317A - Perfect Pair GNU C++0x   Accepted    62 ms   0 KB 
+//4033461   Jul 7, 2013 10:48:16 AM	fuwutu	 92A - Chips	 GNU C++0x	Accepted	 15 ms	 0 KB
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    long long x, y, m;
-    cin >> x >> y >> m;
-    if (x >= m || y >= m)
+    int n, m;
+    cin >> n >> m;
+    m %= (n * (n + 1) / 2);
+    for (int i = 1; i <= n; ++i)
     {
-        cout << 0 << endl;
-    }
-    else
-    {
-        if (x <= 0 && y <= 0)
+        if (m < i)
         {
-            cout << -1 << endl;
+            break;
         }
-        else
-        {
-            if (x < y)
-            {
-                swap(x, y);
-            }
-            long long result(0);
-            if (y < 0)
-            {
-                long long n = (-y) / x + 1;
-                result += n;
-                y += x * n;
-            }
-            while (x < m)
-            {
-                y += x;
-                swap(x, y);
-                result += 1;
-            }
-            cout << result << endl;
-        }
+        m -= i;
     }
+    cout << m << endl;
     return 0;
 }

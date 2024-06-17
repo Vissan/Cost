@@ -1,23 +1,26 @@
-//4033020   Jul 7, 2013 7:13:59 AM	fuwutu	 37A - Towers	 GNU C++0x	Accepted	15 ms	0 KB
+//4021768   Jul 4, 2013 7:57:17 PM	fuwutu	 266B - Queue at the School	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <algorithm>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n, l, h[1001] = {0};
-    cin >> n;
-    while (n--)
+    int n, t;
+    string s;
+    cin >> n >> t >> s;
+    while (t--)
     {
-        cin >> l;
-        h[l] += 1;
+        for (int i = 1; i < n; ++i)
+        {
+            if (s[i] == 'G' && s[i-1] == 'B')
+            {
+                s[i] = 'B';
+                s[i-1] = 'G';
+                ++i;
+            }
+        }
     }
-
-    int height = *max_element(h, h + 1001);
-    int number = 1001 - count(h, h + 1001, 0);
-
-    cout << height << " " << number << endl;
-
+    cout << s << endl;
     return 0;
 }

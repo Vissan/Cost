@@ -1,73 +1,37 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
 
-// 防止编译器优化
-volatile long long sum;
+void complexOperations() {
+    volatile int intVar = 0;
+    volatile long long longVar = 0;
+    volatile float floatVar = 0.0f;
+    volatile bool boolVar = false;
+    volatile char charVar = 'A';
 
-void compute_sum(const std::vector<int>& numbers) {
-    for (const auto& num : numbers) {
-        sum += num;
-    }
-}
+    for (volatile int i = 0; i < 1000000; ++i) {
+        // 对int类型执行最多操作
+        for (volatile int j = 0; j < 10; ++j) {
+            intVar += i;
+        }
 
-bool is_prime(int n) {
-    if (n <= 1) return false;
-    for (int i = 2; i <= std::sqrt(n); ++i) {
-        if (n % i == 0) return false;
-    }
-    return true;
-}
+        // 对long long类型执行中等操作
+        longVar += i * 2LL;
 
-void simple_sort(std::vector<int>& numbers) {
-    int n = numbers.size();
-    for (int i = 0; i < n - 1; ++i) {
-        for (int j = 0; j < n - i - 1; ++j) {
-            if (numbers[j] > numbers[j + 1]) {
-                int temp = numbers[j];
-                numbers[j] = numbers[j + 1];
-                numbers[j + 1] = temp;
-            }
+        // 对float类型执行较少操作
+        if (i % 100 == 0) {
+            floatVar += static_cast<float>(i) / 2.0f;
+        }
+
+        // 对bool类型执行单次操作
+        boolVar = !boolVar;
+
+        // 对char类型执行单次操作
+        if (i % 1000 == 0) {
+            charVar = (char)((charVar - 'A' + 1) % 26 + 'A');
         }
     }
 }
 
 int main() {
-    std::vector<int> numbers;
-    for (int i = 1; i <= 1000; ++i) {
-        numbers.push_back(i);
-    }
-
-    sum = 0;
-
-    // 条件语句
-    if (!numbers.empty()) {
-        compute_sum(numbers);
-    }
-
-    // 使用while循环
-    int counter = 0;
-    while (counter < 10) {
-        counter++;
-        sum += counter;
-    }
-
-    // 使用do-while循环
-    int do_counter = 0;
-    do {
-        do_counter++;
-        sum += do_counter;
-    } while (do_counter < 10);
-
-    // 使用范围for循环
-    for (const auto& num : numbers) {
-        if (is_prime(num)) {
-            sum += num;
-        }
-    }
-
-    // 使用自定义排序
-    simple_sort(numbers);
-
+    complexOperations();
     return 0;
 }

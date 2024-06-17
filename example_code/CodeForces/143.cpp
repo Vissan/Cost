@@ -1,4 +1,4 @@
-//4007122   Jul 3, 2013 7:08:49 PM	fuwutu	 282A - Bit++	 GNU C++0x	Accepted	15 ms	0 KB
+//4057616   Jul 13, 2013 7:20:24 AM	fuwutu	 43A - Football	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
 #include <string>
 
@@ -6,23 +6,30 @@ using namespace std;
 
 int main()
 {
-    int n, x(0);
+    int n, goal(0);
     cin >> n;
 
-    string s;
+    string team, win;
     while (n--)
     {
-        cin >> s;
-        if (s[1] == '+')
+        if (goal != 0)
         {
-            ++x;
+            cin >> team;
+            if (team == win)
+            {
+                goal += 1;
+            }
+            else
+            {
+                goal -= 1;
+            }
         }
         else
         {
-            --x;
+            cin >> win;
+            goal = 1;
         }
     }
-
-    cout << x << endl;
+    cout << win << endl;
     return 0;
 }

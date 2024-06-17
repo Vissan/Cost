@@ -1,32 +1,23 @@
-//4306556	 Aug 18, 2013 7:48:28 AM	fuwutu	 66B - Petya and Countryside	 GNU C++0x	Accepted	30 ms	0 KB
-#include <cstdio>
+//4032921   Jul 7, 2013 5:54:54 AM	fuwutu	 278A - Circle Line	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, height[1000], left[1000] = {0}, right[1000] = {0};
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    int n, d, f[100+2] = {0}, s, t;
+    cin >> n;
+    for (int i = 2; i < n + 2; ++i)
     {
-        scanf("%d", &height[i]);
+        cin >> d;
+        f[i] = f[i-1] + d;
     }
-
-    for (int i = 1; i < n; ++i)
+    cin >> s >> t;
+    if (s > t)
     {
-        left[i] = (height[i] >= height[i-1] ? left[i-1] + 1 : 0);
+        swap(s, t);
     }
-    for (int i = n - 2; i >= 0; --i)
-    {
-        right[i] = (height[i] >= height[i+1] ? right[i+1] + 1 : 0);
-    }
-
-    int maximal(0);
-    for (int i = 0; i < n; ++i)
-    {
-        if (left[i] + right[i] + 1 > maximal)
-        {
-            maximal = left[i] + right[i] + 1;
-        }
-    }
-    printf("%d\n", maximal);
+    int distance = f[t] - f[s];
+    cout << min(distance, (f[n+1] - distance)) << endl;
     return 0;
 }

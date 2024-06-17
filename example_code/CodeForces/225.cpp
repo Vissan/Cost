@@ -1,29 +1,27 @@
-//4172472   Jul 27, 2013 5:55:14 AM	fuwutu	 78A - Haiku	 GNU C++0x	Accepted	30 ms	0 KB
-#include <iostream>
-
-using namespace std;
+//4058602   Jul 13, 2013 12:18:22 PM	fuwutu	 282B - Painting Eggs	 GNU C++0x	Accepted	484 ms	0 KB
+#include <cstdio>
 
 int main()
 {
-    char ch[101];
-    int syllables[3] = {5, 7, 5};
-    bool haiku(true);
-    for (int i = 0; i < 3; ++i)
+    int n, a, g;
+    scanf("%d", &n);
+
+    int A(0);
+    while (n--)
     {
-        cin.getline(ch, sizeof(ch) / sizeof(ch[0]));
-        int n = 0;
-        for (int j = 0; ch[j] != 0; ++j)
+        scanf("%d%d", &a, &g);
+        A += a;
+        if (A <= 500)
         {
-            if (ch[j] == 'a' || ch[j] == 'e' || ch[j] == 'i' || ch[j] == 'o' || ch[j] == 'u')
-            {
-                n += 1;
-            }
+            printf("A");
         }
-        if (n != syllables[i])
+        else
         {
-            haiku = false;
+            A -= 1000;
+            printf("G");
         }
     }
-    cout << (haiku ? "YES" : "NO") << endl;
+    printf("\n");
+
     return 0;
 }

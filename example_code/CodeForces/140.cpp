@@ -1,53 +1,39 @@
-//4332589	 Aug 24, 2013 4:25:09 PM	fuwutu	 278B - New Problem	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <cstdio>
-#include <cstring>
+//4124738   Jul 21, 2013 4:00:21 AM	fuwutu	 3A - Shortest path of the king	 GNU C++0x	Accepted	 15 ms	 0 KB
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
 
 int main()
 {
-    int n;
-    char ch[30];
-    bool exist1[26] = {false}, exist2[26][26] = {false};
-
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    string s, t;
+    cin >> s >> t;
+    cout << max(abs(s[0] - t[0]), abs(s[1] - t[1])) << endl;
+    while (s != t)
     {
-        scanf("%s", ch);
-        for (int j = 0; j < strlen(ch); ++j)
+        if (s[0] < t[0])
         {
-            exist1[ch[j]-'a'] = true;
+            cout << "R";
+            s[0] += 1;
         }
-        for (int j = 1; j < strlen(ch); ++j)
+        else if (s[0] > t[0])
         {
-            exist2[ch[j-1]-'a'][ch[j]-'a'] = true;
+            cout << "L";
+            s[0] -= 1;
         }
-    }
 
-    bool found = false;
-    for (char c = 'a'; c <= 'z'; ++c)
-    {
-        if (!exist1[c-'a'])
+        if (s[1] < t[1])
         {
-            printf("%c\n", c);
-            found = true;
-            break;
+            cout << "U";
+            s[1] += 1;
         }
-    }
-
-    if (!found)
-    {
-        for (char c1 = 'a'; !found && c1 <= 'z'; ++c1)
+        else if (s[1] > t[1])
         {
-            for (char c2 = 'a'; c2 <= 'z'; ++c2)
-            {
-                if (!exist2[c1-'a'][c2-'a'])
-                {
-                    printf("%c%c\n", c1, c2);
-                    found = true;
-                    break;
-                }
-            }
+            cout << "D";
+            s[1] -= 1;
         }
-    }
 
+        cout << endl;
+    }
     return 0;
 }

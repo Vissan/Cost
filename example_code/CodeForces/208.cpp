@@ -1,30 +1,28 @@
-//4231238 Aug 5, 2013 8:54:36 AM fuwutu 49A - Sleuth GNU C++0x Accepted 62 ms 0 KB 
+//4021277   Jul 4, 2013 7:21:06 PM	fuwutu	 110A - Nearly Lucky Number	 GNU C++0x	Accepted	 15 ms	 0 KB
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    char s[110];
-    cin.getline(s, sizeof(s) / sizeof(s[0]), '\n');
-    bool vowel(true);
-    char* p = s;
-    while (*p != '\0')
+    long long n;
+    cin >> n;
+    int count = 0;
+    while (n != 0)
     {
-        if (*p >= 'a' && *p <= 'z' || *p >= 'A' && *p <= 'Z')
+        if (n % 10 == 4 || n % 10 == 7)
         {
-            if (*p == 'a' ||*p == 'e' ||*p == 'i' ||*p == 'o' ||*p == 'u' ||*p == 'y' ||
-                *p == 'A' ||*p == 'E' ||*p == 'I' ||*p == 'O' ||*p == 'U' ||*p == 'Y')
-            {
-                vowel = true;
-            }
-            else
-            {
-                vowel = false;
-            }
+            count += 1;
         }
-        ++p;
+        n /= 10;
     }
-    cout << (vowel ? "YES" : "NO") << endl;
+    if (count == 4 || count == 7)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
     return 0;
 }

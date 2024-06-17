@@ -1,56 +1,24 @@
-//4192132   Jul 28, 2013 4:38:27 AM	fuwutu	 2A - Winner	 GNU C++0x	Accepted	30 ms	200 KB
+//4004040   Jul 2, 2013 8:47:17 PM	fuwutu	 71A - Way Too Long Words	 GNU C++0x	Accepted	 15 ms	 0 KB
 #include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <set>
 
 using namespace std;
 
 int main()
 {
     int n;
+    string s;
     cin >> n;
-
-    vector<pair<string, int>> rounds(n);
-    map<string, int> player2score;
-    for (int i = 0; i < n; ++i)
+    while (n--)
     {
-        cin >> rounds[i].first >> rounds[i].second;
-        player2score[rounds[i].first] += rounds[i].second;
-    }
-
-    set<string> winners;
-    int m(-1000001);
-    for (map<string, int>::iterator it = player2score.begin(); it != player2score.end(); ++it)
-    {
-        if (it->second > m)
+        cin >> s;
+        if (s.length() > 10)
         {
-            m = it->second;
-            winners.clear();
-            winners.insert(it->first);
+            cout << s[0] << s.length() - 2 << s[s.length() - 1] << endl;
         }
-        else if (it->second == m)
+        else
         {
-            winners.insert(it->first);
+            cout << s << endl;
         }
     }
-
-    if (winners.size() > 1)
-    {
-        player2score.clear();
-        for (vector<pair<string, int>>::iterator it = rounds.begin(); it != rounds.end(); ++it)
-        {
-            player2score[it->first] += it->second;
-            if (player2score[it->first] >= m && winners.count(it->first) == 1)
-            {
-                winners.clear();
-                winners.insert(it->first);
-                break;
-            }
-        }
-    }
-
-    cout << *winners.begin() << endl;
     return 0;
 }

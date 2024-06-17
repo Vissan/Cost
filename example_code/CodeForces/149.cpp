@@ -1,22 +1,12 @@
-//4035044   Jul 7, 2013 6:06:34 PM	fuwutu	 285B - Find Marble	 GNU C++0x	Accepted	46 ms	400 KB
-#include <cstdio>
+//4006895   Jul 3, 2013 6:00:13 PM	fuwutu	 50A - Domino piling	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, s, t, p[100000+1];
-    scanf("%d%d%d", &n, &s, &t);
-    for (int i = 1; i <= n; ++i)
-    {
-        scanf("%d", &p[i]);
-    }
-    int step = 0;
-    while (s != t && p[s] != 0)
-    {
-        int temp = p[s];
-        p[s] = 0;
-        s = temp;
-        step += 1;
-    }
-    printf("%d\n", s == t ? step : -1);
+    int M, N;
+    cin >> M >> N;
+    cout << M * N / 2 << endl;
     return 0;
 }

@@ -1,31 +1,24 @@
-//4033186   Jul 7, 2013 8:44:41 AM	fuwutu	 291A - Spyke Talks	 GNU C++0x	Accepted	15 ms	0 KB
+//4027387   Jul 5, 2013 6:31:42 PM	fuwutu	 61A - Ultra-Fast Mathematician	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <algorithm>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n, id[1000];
-    cin >> n;
-    for (int i = 0; i < n; ++i)
+    string s1, s2;
+    cin >> s1 >> s2;
+    for (size_t i = 0; i < s1.length(); ++i)
     {
-        cin >> id[i];
-    }
-    sort(id, id + n);
-    int pairs = 0;
-    for (int i = 1; i < n; ++i)
-    {
-        if (id[i] != 0 && id[i] == id[i-1])
+        if (s1[i] == s2[i])
         {
-            pairs += 1;
-            if (i + 1 < n && id[i] == id[i+1])
-            {
-                pairs = -1;
-                break;
-            }
+            s1[i] = '0';
+        }
+        else
+        {
+            s1[i] = '1';
         }
     }
-    cout << pairs << endl;
+    cout << s1 << endl;
     return 0;
 }

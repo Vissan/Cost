@@ -1,4 +1,4 @@
-//4172496   Jul 27, 2013 6:04:28 AM	fuwutu	 34A - Reconnaissance 2	 GNU C++0x	Accepted	30 ms	0 KB
+//4033603   Jul 7, 2013 11:36:30 AM	fuwutu	 263B - Squares	 GNU C++0x	Accepted	 15 ms	 0 KB
 #include <iostream>
 #include <algorithm>
 
@@ -6,28 +6,19 @@ using namespace std;
 
 int main()
 {
-    int n, a1;
-    cin >> n >> a1;
-
-    int prev(a1), cur, reconnaissance(1000), index1, index2;
-    for (int i = 2; i <= n; ++i)
+    int n, k, a[50+1];
+    cin >> n >> k;
+    for (int i = 0; i < n; ++i)
+        cin >> a[i];
+    sort(a, a + n, greater<int>());
+    a[n] = 0;
+    if (k > n)
     {
-        cin >> cur;
-        int diff = abs(cur - prev);
-        if (diff < reconnaissance)
-        {
-            reconnaissance = diff;
-            index1 = i - 1;
-            index2 = i;
-        }
-        prev = cur;
+        cout << -1 << endl;
     }
-    int diff = abs(a1 - prev);
-    if (diff < reconnaissance)
+    else
     {
-        index1 = n;
-        index2 = 1;
+        cout << a[k-1] << " " << 0 << endl;
     }
-    cout << index1 << " " << index2 << endl;
     return 0;
 }

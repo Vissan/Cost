@@ -1,22 +1,21 @@
-//4055785   Jul 12, 2013 8:36:40 PM	fuwutu	 81A - Plug-in	 GNU C++0x	Accepted	15 ms	200 KB
+//4033063   Jul 7, 2013 7:36:19 AM	fuwutu	 285A - Slightly Decreasing Permutations	 GNU C++0x	Accepted	31 ms	0 KB
 #include <cstdio>
 
 int main()
 {
-    char ch[200001];
-    scanf("%s", ch);
-    char* p = ch;
-    int n = 0;
-    while (*p != 0)
+    int n, k;
+    scanf("%d%d", &n, &k);
+
+    for (int i = 0; i < k; ++i)
     {
-        ch[n++] = *p;
-        if (n >= 2 && ch[n-1] == ch[n-2])
-        {
-            n -= 2;
-        }
-        ++p;
+        printf("%d ", n - i);
     }
-    ch[n] = 0;
-    printf("%s\n", ch);
+    printf("1");
+    for (int i = 2; i <= n - k; ++i)
+    {
+        printf(" %d", i);
+    }
+    printf("\n");
+
     return 0;
 }

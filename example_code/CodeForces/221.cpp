@@ -1,25 +1,53 @@
-//4240257   Aug 7, 2013 4:45:32 PM	fuwutu	 6A - Triangle	 GNU C++0x	Accepted	 62 ms	 0 KB
+//4332589	 Aug 24, 2013 4:25:09 PM	fuwutu	 278B - New Problem	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <cstdio>
-#include <algorithm>
-
-using namespace std;
+#include <cstring>
 
 int main()
 {
-    int length[4];
-    scanf("%d%d%d%d", &length[0], &length[1], &length[2], &length[3]);
-    sort(length, length + 4);
-    if (length[0] + length[1] > length[2] || length[1] + length[2] > length[3])
+    int n;
+    char ch[30];
+    bool exist1[26] = {false}, exist2[26][26] = {false};
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i)
     {
-        printf("TRIANGLE\n");
+        scanf("%s", ch);
+        for (int j = 0; j < strlen(ch); ++j)
+        {
+            exist1[ch[j]-'a'] = true;
+        }
+        for (int j = 1; j < strlen(ch); ++j)
+        {
+            exist2[ch[j-1]-'a'][ch[j]-'a'] = true;
+        }
     }
-    else if (length[0] + length[1] == length[2] || length[1] + length[2] == length[3])
+
+    bool found = false;
+    for (char c = 'a'; c <= 'z'; ++c)
     {
-        printf("SEGMENT\n");
+        if (!exist1[c-'a'])
+        {
+            printf("%c\n", c);
+            found = true;
+            break;
+        }
     }
-    else
+
+    if (!found)
     {
-        printf("IMPOSSIBLE\n");
+        for (char c1 = 'a'; !found && c1 <= 'z'; ++c1)
+        {
+            for (char c2 = 'a'; c2 <= 'z'; ++c2)
+            {
+                if (!exist2[c1-'a'][c2-'a'])
+                {
+                    printf("%c%c\n", c1, c2);
+                    found = true;
+                    break;
+                }
+            }
+        }
     }
+
     return 0;
 }

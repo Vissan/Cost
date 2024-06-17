@@ -1,15 +1,32 @@
-//4266235   Aug 11, 2013 6:06:06 PM	fuwutu	 257B - Playing Cubes	 GNU C++0x	Accepted	30 ms	0 KB
+//4057739   Jul 13, 2013 7:54:54 AM	fuwutu	 327A - Flipping Game	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    int Vasya = min(n, m);
-    int Petya = n + m - 1 - Vasya;
-    cout << Petya << " " << Vasya << endl;
+    int n, a, count1(0), extra0(0), extra0max(-1);
+    cin >> n;
+    while (n--)
+    {
+        cin >> a;
+        if (a == 1)
+        {
+            count1 += 1;
+            if (extra0 > 0)
+            {
+                extra0 -= 1;
+            }
+        }
+        else
+        {
+            extra0 += 1;
+            if (extra0 > extra0max)
+            {
+                extra0max = extra0;
+            }
+        }
+    }
+    cout << count1 + extra0max << endl;
     return 0;
 }

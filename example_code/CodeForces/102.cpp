@@ -1,24 +1,27 @@
-//4263640   Aug 11, 2013 6:44:25 AM 	fuwutu 	245B - Internet Address 	GNU C++0x 	Accepted 	30 ms 	0 KB
-#include <string>
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 
 using namespace std;
 
 int main()
 {
-    string s;
-    cin >> s;
+    int n = 3; // Example number of points
+    int k = 10; // Example value of k
 
-    size_t p = s.find('p');
-    s.insert(p + 1, "://");
+    double x0 = 0.0; // Example initial x coordinate
+    double y0 = 0.0; // Example initial y coordinate
+    double x, y, total = 0.0;
 
-    size_t ru = s.find("ru", p + 5);
-    if (ru + 2 != s.length())
+    for (int i = 0; i < n - 1; ++i)
     {
-        s.insert(ru + 2, "/");
-    }
-    s.insert(ru, ".");
+        // Example input for next point
+        cin >> x >> y;
 
-    cout << s << endl;
+        total += sqrt((x - x0) * (x - x0) + (y - y0) * (y - y0));
+        x0 = x;
+        y0 = y;
+    }
+
     return 0;
 }

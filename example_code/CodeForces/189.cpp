@@ -1,34 +1,25 @@
-//4259668   Aug 10, 2013 8:56:45 AM	fuwutu00:06	 336A - Vasily the Bear and Triangle	 GNU C++0x	Accepted	 30 ms	 0 KB
+//4005085     Jul 3, 2013 3:50:19 AM	fuwutu	 118A - String Task	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <cmath>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int x, y;
-    cin >> x >> y;
-    if (x > 0)
+    string s, r;
+    cin >> s;
+    for (char c : s)
     {
-        if (y > 0)
+        if (c >= 'A' && c <= 'Z')
         {
-            cout << 0 << " " << x + y << " " << x + y << " " << 0 << endl;
+            c += 'a' - 'A';
         }
-        else
+        if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u' && c != 'y')
         {
-            cout << 0 << " " << y - x << " " << x - y << " " << 0 << endl;;
+            r.append(1, '.');
+            r.append(1, c);
         }
     }
-    else
-    {
-        if (y > 0)
-        {
-            cout << x - y << " " << 0 << " " << 0 << " " << y - x << endl;;
-        }
-        else
-        {
-            cout << x + y << " " << 0 << " " << 0 << " " << x + y << endl;;
-        }
-    }
+    cout << r << endl;
     return 0;
 }

@@ -1,26 +1,30 @@
-//4300351 	Aug 17, 2013 4:18:19 AM 	fuwutu 	337A - Puzzles 	GNU C++0x 	Accepted 	30 ms 	0 KB
-#include <iostream>
+//4265752   Aug 11, 2013 4:22:47 PM	fuwutu	 106B - Choosing Laptop	 GNU C++0x	Accepted	30 ms	0 KB
+#include <cstdio>
 #include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int n, m, f[1000];
-    cin >> n >> m;
-    for (int i = 0; i < m; ++i)
+    int n, speed[101], ram[101], hdd[101], cost[101];
+    scanf("%d", &n);
+    for (int i = 1; i <= n; ++i)
     {
-        cin >> f[i];
+        scanf("%d%d%d%d", &speed[i], &ram[i], &hdd[i], &cost[i]);
     }
-    sort(f, f + m);
-    int least = f[n-1] - f[0];
-    for (int i = 1; i <= m - n; ++i)
+
+    for (int i = 1; i <= n; ++i)
     {
-        if (f[i+n-1] - f[i] < least)
+        for (int j = 1; j <= n; ++j)
         {
-            least = f[i+n-1] - f[i];
+            if (speed[i] < speed[j] && ram[i] < ram[j] && hdd[i] < hdd[j])
+            {
+                cost[i] = 1001; // 100 <= cost <= 1000
+            }
         }
     }
-    cout << least << endl;
+
+    printf("%u\n", min_element(cost + 1, cost + 1 + n) - cost);
+
     return 0;
 }

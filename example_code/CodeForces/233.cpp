@@ -1,29 +1,26 @@
-//4263203   Aug 11, 2013 4:19:31 AM 	fuwutu 	94A - Restoring Password 	GNU C++0x 	Accepted 	62 ms 	100 KB
-#include <iostream>
-#include <string>
+//4034133   Jul 7, 2013 1:47:35 PM	fuwutu	 285C - Building Permutation	 GNU C++0x	Accepted	140 ms	1100 KB
+#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    string s, digit[10];
-    cin >> s;
-    for (size_t i = 0; i < sizeof(digit) / sizeof(digit[0]); ++i)
+    int n, a[300000];
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; ++i)
     {
-        cin >> digit[i];
+        scanf("%d", &a[i]);
     }
-    for (size_t i = 0; i < 8; ++i)
+    sort(a, a + n);
+
+    long long result(0);
+    for (int i = 0; i < n; ++i)
     {
-        string x = s.substr(i * 10, 10);
-        for (size_t j = 0; j < 10; ++j)
-        {
-            if (x == digit[j])
-            {
-                cout << j;
-                break;
-            }
-        }
+        result += abs(i + 1 - a[i]);
     }
-    cout << endl;
+    printf("%I64d", result);
+
     return 0;
 }

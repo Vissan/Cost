@@ -1,18 +1,35 @@
-//4175632   Jul 27, 2013 12:40:22 PM	fuwutu	 334A - Candy Bags	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <cstdio>
+//4059072   Jul 13, 2013 1:57:50 PM 	fuwutu 	253A - Boys and Girls 	GNU C++0x 	Accepted 	15 ms 	200 KB
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
 
 int main()
 {
-    int n;
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    size_t n, m;
+
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    cin >> n >> m;
+
+    if (n >= m)
     {
-        printf("%d", i + 1);
-        for (int j = 1; j < n; ++j)
+        string s(n+m, 'B');
+        for (size_t i = 1; i < m * 2; i += 2)
         {
-            printf(" %d", n * j + (i + j) % n + 1);
+            s[i] = 'G';
         }
-        printf("\n");
+        cout << s << endl;
+    }
+    else
+    {
+        string s(m+n, 'G');
+        for (size_t i = 1; i < n * 2; i += 2)
+        {
+            s[i] = 'B';
+        }
+        cout << s << endl;
     }
     return 0;
 }

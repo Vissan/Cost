@@ -1,26 +1,38 @@
-//4034133   Jul 7, 2013 1:47:35 PM	fuwutu	 285C - Building Permutation	 GNU C++0x	Accepted	140 ms	1100 KB
-#include <cstdio>
-#include <algorithm>
+//4027656   Jul 5, 2013 7:34:35 PM	fuwutu	 58A - Chat room	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n, a[300000];
-    scanf("%d", &n);
+    string s;
+    cin >> s;
 
-    for (int i = 0; i < n; ++i)
-    {
-        scanf("%d", &a[i]);
-    }
-    sort(a, a + n);
+    size_t pos = 0;
+    while (pos < s.length() && s[pos] != 'h')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'e')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'l')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'l')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'o')
+        ++pos;
 
-    long long result(0);
-    for (int i = 0; i < n; ++i)
+    if (pos < s.length())
     {
-        result += abs(i + 1 - a[i]);
+        cout << "YES" << endl;
     }
-    printf("%I64d", result);
+    else
+    {
+        cout << "NO" << endl;
+    }
 
     return 0;
 }

@@ -1,68 +1,24 @@
-//4034291   Jul 7, 2013 2:22:31 PM	fuwutu	 300A - Array	 GNU C++0x	Accepted	 15 ms	 0 KB
+//4189293   Jul 27, 2013 5:07:36 PM	fuwutu	 74A - Room Leader	 GNU C++0x	Accepted	30 ms	100 KB
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n;
+    int n, plus, minus, a, b, c, d, e, top(-2501);
+    string handle, leader;
     cin >> n;
-
-    vector<int> arr(n);
-    for (int i = 0; i < n; ++i)
+    while (n--)
     {
-        cin >> arr[i];
-    }
-
-    for (vector<int>::iterator it = arr.begin(); it != arr.end(); ++it)
-    {
-        if (*it < 0)
+        cin >> handle >> plus >> minus >> a >> b >> c >> d >> e;
+        int points = plus * 100 - minus * 50 + a + b + c + d + e;
+        if (points > top)
         {
-            cout << "1 " << *it << endl;
-            arr.erase(it);
-            break;
+            leader = handle;
+            top = points;
         }
     }
-
-    bool found(false);
-    for (vector<int>::iterator it = arr.begin(); it != arr.end(); ++it)
-    {
-        if (*it > 0)
-        {
-            found = true;
-            cout << "1 " << *it << endl;
-            arr.erase(it);
-            break;
-        }
-    }
-
-    if (!found)
-    {
-        cout << "2";
-        int count = 0;
-        for (vector<int>::iterator it = arr.begin(); count < 2;)
-        {
-            if (*it < 0)
-            {
-                cout << " " << *it;
-                it = arr.erase(it);
-                ++count;
-            }
-            else
-            {
-                ++it;
-            }
-        }
-        cout << endl;
-    }
-
-    cout << arr.size();
-    for (size_t i = 0; i < arr.size(); ++i)
-    {
-        cout << " " << arr[i];
-    }
-    cout << endl;
-
+    cout << leader;
     return 0;
 }

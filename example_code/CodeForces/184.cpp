@@ -1,18 +1,19 @@
-//4188836   Jul 27, 2013 4:31:25 PM	fuwutu	 333A - Secrets	 GNU C++0x	Accepted	30 ms	0 KB
-#include <iostream>
+//4034999   Jul 7, 2013 5:49:19 PM	fuwutu	 248A - Cupboards	 GNU C++0x	Accepted	15 ms	0 KB
+#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    long long n;
-    cin >> n;
-
-    while (n % 3 == 0)
+    int n, l, r, left(0), right(0);
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i)
     {
-        n /= 3;
+        scanf("%d%d", &l, &r);
+        left += l;
+        right += r;
     }
-
-    cout << n / 3 + 1 << endl;
+    printf("%d\n", min(left, n - left) + min(right, n - right));
     return 0;
 }

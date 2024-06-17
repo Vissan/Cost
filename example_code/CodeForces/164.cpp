@@ -1,52 +1,59 @@
-//4263699   Aug 11, 2013 7:03:13 AM 	fuwutu 	312A - Whose sentence is it? 	GNU C++0x 	Accepted 	62 ms 	100 KB
-#include <string>
+//4266560   Aug 11, 2013 7:04:01 PM	fuwutu	 79A - Bus Game	 GNU C++0x	Accepted	30 ms	0 KB
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
+    int x, y;
+    cin >> x >> y;
+    int turns = min(x / 2, y / 24);
+    x -= 2 * turns;
+    y -= 24 * turns;
 
-    char ch[101];
-    cin.getline(ch, 101);
-
-    string s;
-    while (n--)
+    while (true)
     {
-        cin.getline(ch, 101);
-        s.assign(ch);
-
-        if (s.length() >= 5)
+        if (x >= 2 && y >= 2)
         {
-            if (s.substr(s.length() - 5, 5) == "lala.")
-            {
-                if (s.substr(0, 5) == "miao.")
-                {
-                    cout << "OMG>.< I don't know!" << endl;
-                }
-                else
-                {
-                    cout << "Freda's" << endl;
-                }
-            }
-            else
-            {
-                if (s.substr(0, 5) == "miao.")
-                {
-                    cout << "Rainbow's" << endl;
-                }
-                else
-                {
-                    cout << "OMG>.< I don't know!" << endl;
-                }
-            }
+            x -= 2;
+            y -= 2;
+        }
+        else if (x >= 1 && y >= 12)
+        {
+            x -= 1;
+            y -= 12;
+        }
+        else if (y >= 22)
+        {
+            y -= 22;
         }
         else
         {
-            cout << "OMG>.< I don't know!" << endl;
+            cout << "Hanako" << endl;
+            break;
+        }
+
+        if (y >= 22)
+        {
+            y -= 22;
+        }
+        else if (x >= 1 && y >= 12)
+        {
+            x -= 1;
+            y -= 12;
+        }
+        else if (x >= 2 && y >= 2)
+        {
+            x -= 2;
+            y -= 2;
+        }
+        else
+        {
+            cout << "Ciel" << endl;
+            break;
         }
     }
+
     return 0;
 }

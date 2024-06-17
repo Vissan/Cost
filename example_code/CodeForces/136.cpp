@@ -1,36 +1,16 @@
-//4032976   Jul 7, 2013 6:40:04 AM	fuwutu	 276A - Lunch Rush	 GNU C++0x	Accepted	31 ms	0 KB
-#include <iostream>
-
-using namespace std;
+#include <cstdio>
 
 int main()
 {
-    int n, k, f, t, max_joy, joy;
-    cin >> n >> k >> f >> t;
-    if (t > k)
-    {
-        max_joy = f - (t - k);
-    }
-    else
-    {
-        max_joy = f;
-    }
-    while (--n)
-    {
-        cin >> f >> t;
-        if (t > k)
-        {
-            joy = f - (t - k);
-        }
-        else
-        {
-            joy = f;
-        }
-        if (joy > max_joy)
-        {
-            max_joy = joy;
-        }
-    }
-    cout << max_joy << endl;
+    char symbols[3][4] = {
+        {'X', 'O', 'X', '\0'}, // Example row 1
+        {'O', 'X', 'O', '\0'}, // Example row 2
+        {'X', 'O', 'X', '\0'}  // Example row 3
+    };
+
+    bool isSuperAgent = (symbols[0][0] == symbols[2][2] && symbols[0][1] == symbols[2][1] && symbols[0][2] == symbols[2][0] && symbols[1][0] == symbols[1][2]);
+
+    // Now you can use the 'isSuperAgent' variable as needed in your program
+
     return 0;
 }

@@ -1,32 +1,32 @@
-//4055457   Jul 12, 2013 6:54:18 PM	fuwutu	 313B - Ilya and Queries	 GNU C++0x	Accepted	109 ms	500 KB
-#include <cstdio>
-#include <cstring>
+//4034860   Jul 7, 2013 5:08:41 PM	fuwutu	 80A - Panoramixs Prediction	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+bool isprime(int n)
+{
+    for (int i = 2; i * i <= n; ++i)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 int main()
 {
-    char s[100001];
-    int a[100001], m, l, r;
+    int n, m;
+    cin >> n >> m;
 
-    scanf("%s%d", s, &m);
-    int len = strlen(s);
-
-    a[1] = 0;
-    for (int i = 1; i < len; ++i)
+    int next = n + 1;
+    while (!isprime(next))
     {
-        if (s[i] == s[i-1])
-        {
-            a[i+1] = a[i] + 1;
-        }
-        else
-        {
-            a[i+1] = a[i];
-        }
+        next += 1;
     }
 
-    while (m--)
-    {
-        scanf("%d%d", &l, &r);
-        printf("%d\n", a[r] - a[l]);
-    }
+    cout << (next == m ? "YES" : "NO") << endl;
+
     return 0;
 }

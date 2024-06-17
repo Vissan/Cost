@@ -1,41 +1,22 @@
-//4034464   Jul 7, 2013 3:07:20 PM	fuwutu	 287A - IQ Test	 GNU C++0x	Accepted	 15 ms	 0 KB
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
+//4240179   Aug 7, 2013 4:19:54 PM	fuwutu	 58B - Coins	 GNU C++0x	Accepted	 30 ms	 0 KB
+#include <cstdio>
 
 int main()
 {
-    vector<string> vs(4);
-    for (size_t i = 0; i < 4; ++i)
+    int n;
+    scanf("%d", &n);
+    while (n != 1)
     {
-        cin >> vs[i];
-    }
-
-    bool pass = false;
-    for (size_t top = 0; top <= 2 && !pass; ++top)
-    {
-        for (size_t left = 0; left <= 2; ++left)
+        printf("%d ", n);
+        for (int i = 2; i <= n; ++i)
         {
-            int dot = 0;
-            for (size_t r = 0; r < 2; ++r)
+            if (n % i == 0)
             {
-                for (size_t c = 0; c < 2; ++c)
-                {
-                    if (vs[top+r][left+c] == '.')
-                    {
-                        dot += 1;
-                    }
-                }
-            }
-            if (dot != 2)
-            {
-                pass = true;
+                n /= i;
                 break;
             }
         }
     }
-    cout << (pass ? "YES" : "NO") << endl;
+    printf("%d\n", n);
     return 0;
 }

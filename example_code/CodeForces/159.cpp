@@ -1,27 +1,25 @@
-//4285064	 Aug 16, 2013 9:06:46 AM	fuwutu	 29A - Spit Problem	 GNU C++0x	Accepted	 30 ms	 0 KB
+//4240257   Aug 7, 2013 4:45:32 PM	fuwutu	 6A - Triangle	 GNU C++0x	Accepted	 62 ms	 0 KB
 #include <cstdio>
+#include <algorithm>
+
+using namespace std;
 
 int main()
 {
-    int n, x[100], d[100];
-    bool spitted = false;
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    int length[4];
+    scanf("%d%d%d%d", &length[0], &length[1], &length[2], &length[3]);
+    sort(length, length + 4);
+    if (length[0] + length[1] > length[2] || length[1] + length[2] > length[3])
     {
-        scanf("%d%d", &x[i], &d[i]);
-        for (int j = 0; j < i; ++j)
-        {
-            if (x[i] + d[i] == x[j] && x[j] + d[j] == x[i])
-            {
-                spitted = true;
-                break;
-            }
-        }
-        if (spitted)
-        {
-            break;
-        }
+        printf("TRIANGLE\n");
     }
-    printf(spitted ? "YES\n" : "NO\n");
+    else if (length[0] + length[1] == length[2] || length[1] + length[2] == length[3])
+    {
+        printf("SEGMENT\n");
+    }
+    else
+    {
+        printf("IMPOSSIBLE\n");
+    }
     return 0;
 }

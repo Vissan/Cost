@@ -1,77 +1,34 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
 
-// 防止编译器优化
-volatile long long sum;
-volatile double float_sum;
+void alternatingOperations() {
+    volatile int intVar = 0;
+    volatile long long longVar = 0;
+    volatile float floatVar = 0.0f;
+    volatile bool boolVar = false;
+    volatile char charVar = 'A';
 
-void compute_sum(const std::vector<int>& numbers) {
-    for (const auto& num : numbers) {
-        sum += num;
-    }
-}
+    for (volatile int i = 0; i < 1000000; ++i) {
+        // 根据i的奇偶性来决定执行哪种类型的操作
+        if (i % 2 == 0) {
+            // 对int类型执行操作
+            intVar += i;
 
-void compute_float_sum(const std::vector<double>& numbers) {
-    for (const auto& num : numbers) {
-        float_sum += num;
-    }
-}
+            // 对float类型执行操作
+            floatVar += static_cast<float>(i) / 2.0f;
+        } else {
+            // 对long long类型执行操作
+            longVar += i * 2LL;
 
-bool is_prime(int n) {
-    if (n <= 1) return false;
-    for (int i = 2; i <= n / 2; ++i) {
-        if (n % i == 0) return false;
-    }
-    return true;
-}
+            // 对bool类型执行操作
+            boolVar = !boolVar;
 
-void simple_sort(std::vector<int>& numbers) {
-    int n = numbers.size();
-    for (int i = 0; i < n - 1; ++i) {
-        for (int j = 0; j < n - i - 1; ++j) {
-            if (numbers[j] > numbers[j + 1]) {
-                std::swap(numbers[j], numbers[j + 1]);
-            }
+            // 对char类型执行操作
+            charVar = (char)((charVar - 'A' + 1) % 26 + 'A');
         }
     }
 }
 
 int main() {
-    std::vector<int> int_numbers(1000);
-    std::vector<double> float_numbers(1000);
-
-    for (int i = 0; i < 1000; ++i) {
-        int_numbers[i] = i + 1;
-        float_numbers[i] = static_cast<double>(i) + 0.5;
-    }
-
-    sum = 0;
-    float_sum = 0.0;
-
-    // 条件语句
-    if (!int_numbers.empty()) {
-        compute_sum(int_numbers);
-    }
-
-    if (!float_numbers.empty()) {
-        compute_float_sum(float_numbers);
-    }
-
-    // 使用范围for循环
-    for (const auto& num : int_numbers) {
-        if (is_prime(num)) {
-            sum += num;
-        }
-    }
-
-    // 使用范围for循环处理浮点数
-    for (const auto& num : float_numbers) {
-        float_sum += std::sqrt(num);
-    }
-
-    // 使用自定义排序
-    simple_sort(int_numbers);
-
+    alternatingOperations();
     return 0;
 }

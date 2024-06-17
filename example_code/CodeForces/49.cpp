@@ -1,44 +1,47 @@
-//4030436   Jul 6, 2013 2:16:09 PM	fuwutu	 158D - Ice Sculptures	 GNU C++0x	Accepted	15 ms	100 KB
+//4275242	 Aug 14, 2013 5:03:19 AM	fuwutu	 264A - Escape from Stones	 GNU C++0x	Accepted	 498 ms	 8800 KB
 #include <cstdio>
-#include <algorithm>
+#include <cstring>
 
-using namespace std;
+char s[1000001];
+int left[1000002];
+int right[1000002];
 
 int main()
 {
-    int n, t[20000], sum(0), partsum[20000];
-    scanf("%d", &n);
+    scanf("%s", s);
+    int n = strlen(s);
 
-    for (int i = 0; i < n; ++i)
-    {
-        scanf("%d", &t[i]);
-        sum += t[i];
-    }
+    right[0] = n + 1;
+    right[n + 1] = 0;
 
-    int maximum(sum);
-    for (int d = 2; d <= n / 3; ++d)
+    int l = 0, r = n + 1;
+    for (int i = 1; i <= n; ++i)
     {
-        if (n % d == 0)
+        right[l] = i;
+        left[i] = l;
+
+        right[i] = r;
+        left[r] = i;
+
+        switch (s[i-1])
         {
-            fill(partsum, partsum + d, 0);
-            int x = n / d;
-            int k = 0;
-            for (int i = 0; i < x; ++i)
-            {
-                for (int j = 0; j < d; ++j)
-                {
-                    partsum[j] += t[k++];
-                }
-            }
-            for (int j = 0; j < d; ++j)
-            {
-                if (partsum[j] > maximum)
-                {
-                    maximum = partsum[j];
-                }
-            }
+        case 'l':
+            r = i;
+            break;
+        case 'r':
+            l = i;
+            break;
+        default:
+            break;
         }
     }
-    printf("%d\n", maximum);
+
+    int x = 0;
+    while (n--)
+    {
+        x = right[x];
+        printf("%d\n", x);
+    }
+
     return 0;
 }

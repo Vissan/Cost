@@ -1,40 +1,36 @@
-//4033867   Jul 7, 2013 12:41:33 PM	fuwutu	 59A - Word	 GNU C++0x	Accepted	15 ms	0 KB
+//4032976   Jul 7, 2013 6:40:04 AM	fuwutu	 276A - Lunch Rush	 GNU C++0x	Accepted	31 ms	0 KB
 #include <iostream>
-#include <string>
-#include <cctype>
 
 using namespace std;
 
 int main()
 {
-    string s;
-    cin >> s;
-    int upper(0), lower(0);
-    for (size_t i = 0; i < s.length(); ++i)
+    int n, k, f, t, max_joy, joy;
+    cin >> n >> k >> f >> t;
+    if (t > k)
     {
-        if (isupper(s[i]))
-        {
-            upper += 1;
-        }
-        else
-        {
-            lower += 1;
-        }
-    }
-    if (upper > lower)
-    {
-        for (size_t i = 0; i < s.length(); ++i)
-        {
-            s[i] = toupper(s[i]);
-        }
+        max_joy = f - (t - k);
     }
     else
     {
-        for (size_t i = 0; i < s.length(); ++i)
+        max_joy = f;
+    }
+    while (--n)
+    {
+        cin >> f >> t;
+        if (t > k)
         {
-            s[i] = tolower(s[i]);
+            joy = f - (t - k);
+        }
+        else
+        {
+            joy = f;
+        }
+        if (joy > max_joy)
+        {
+            max_joy = joy;
         }
     }
-    cout << s << endl;
+    cout << max_joy << endl;
     return 0;
 }

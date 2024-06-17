@@ -1,33 +1,21 @@
-//4057901   Jul 13, 2013 8:57:44 AM	fuwutu	 279B - Books	 GNU C++0x	Accepted	31 ms	400 KB
+//4265426   Aug 11, 2013 3:03:02 PM	fuwutu	 40A - Find Color	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <cstdio>
+#include <cmath>
 
 int main()
 {
-    int n, t, a[100000];
-    scanf("%d%d", &n, &t);
-    for (int i = 0; i < n; ++i)
+    int x, y;
+    scanf("%d%d", &x, &y);
+    int r2 = x * x + y * y;
+    int r = floor(sqrt(static_cast<double>(r2)));
+    if (r * r < r2 && (r + 1) * (r + 1) > r2
+        && (r % 2 == 1 && x * y > 0 || r % 2 == 0 && x * y < 0))
     {
-        scanf("%d", &a[i]);
+        printf("white\n");
     }
-
-    int j(0), time(0);
-    while (j < n && time + a[j] <= t)
+    else
     {
-        time += a[j++];
+        printf("black\n");
     }
-    int maximum(j);
-    for (int i = 0; i < n; ++i)
-    {
-        time -= a[i];
-        while (j < n && time + a[j] <= t)
-        {
-            time += a[j++];
-        }
-        if (j - i - 1 > maximum)
-        {
-            maximum = j - i - 1;
-        }
-    }
-    printf("%d\n", maximum);
     return 0;
 }

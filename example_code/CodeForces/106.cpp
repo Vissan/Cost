@@ -1,27 +1,19 @@
-//4304419	 Aug 17, 2013 7:55:55 PM	fuwutu	 252A - Little Xor	 GNU C++0x	Accepted	30 ms	0 KB
-#include <cstdio>
+//4034903   Jul 7, 2013 5:22:04 PM	fuwutu	 318A - Even Odds	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, a, x[101] = {0};
-    scanf("%d", &n);
-    for (int i = 1; i <= n; ++i)
+    long long n, k;
+    cin >> n >> k;
+    if (k <= (n + 1) / 2)
     {
-        scanf("%d", &a);
-        x[i] = x[i-1] ^ a;
+        cout << k * 2 - 1 << endl;
     }
-    int maximal = 0;
-    for (int i = 0; i < n; ++i)
+    else
     {
-        for (int j = i + 1; j <= n; ++j)
-        {
-            int xx = x[i] ^ x[j];
-            if (xx > maximal)
-            {
-                maximal = xx;
-            }
-        }
+        cout << (k - (n + 1) / 2) * 2 << endl;
     }
-    printf("%d\n", maximal);
     return 0;
 }

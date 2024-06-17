@@ -1,5 +1,6 @@
-//4240656   Aug 7, 2013 7:27:25 PM	fuwutu	 318B - Strings of Power	 GNU C++0x	Accepted	156 ms	2100 KB
+//4259472   Aug 10, 2013 7:43:30 AM	fuwutu	 99A - Help Far Away Kingdom	 GNU C++0x	Accepted	62 ms	0 KB
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -8,22 +9,20 @@ int main()
     string s;
     cin >> s;
 
-    int heavy(0);
-    long long amount(0);
-    for (size_t i = 4; i < s.length(); ++i)
+    size_t n = s.find('.');
+    if (s[n-1] == '9')
     {
-        if (s[i] == 'l')
-        {
-            if (s[i-4] == 'm' && s[i-3] == 'e' && s[i-2] == 't' && s[i-1] == 'a')
-            {
-                amount += heavy;
-            }
-        }
-        else if (s[i-4] == 'h' && s[i-3] == 'e' && s[i-2] == 'a' && s[i-1] == 'v' && s[i] == 'y')
-        {
-            ++heavy;
-        }
+        cout << "GOTO Vasilisa." << endl;
     }
-    cout << amount << endl;
+    else
+    {
+        if (s[n+1] >= '5')
+        {
+            s[n-1] += 1;
+        }
+        s.erase(s.begin() + n, s.end());
+        cout << s << endl;
+    }
+
     return 0;
 }

@@ -1,24 +1,30 @@
-//4237725   Aug 6, 2013 9:18:15 PM 	fuwutu 	282C - XOR and OR 	GNU C++0x 	Accepted 	280 ms 	3100 KB
+//4231238 Aug 5, 2013 8:54:36 AM fuwutu 49A - Sleuth GNU C++0x Accepted 62 ms 0 KB 
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    string a, b;
-    cin >> a >> b;
-    bool can(false);
-    if (a.length() == b.length())
+    char s[110];
+    cin.getline(s, sizeof(s) / sizeof(s[0]), '\n');
+    bool vowel(true);
+    char* p = s;
+    while (*p != '\0')
     {
-        size_t ia(0), ib(0);
-        while (ia < a.length() && a[ia] == '0')
-            ++ia;
-        while (ib < b.length() && b[ib] == '0')
-            ++ib;
-        if ((ia < a.length() && ib < b.length())
-            || (ia == a.length() && ib == b.length()))
-            can = true;
+        if (*p >= 'a' && *p <= 'z' || *p >= 'A' && *p <= 'Z')
+        {
+            if (*p == 'a' ||*p == 'e' ||*p == 'i' ||*p == 'o' ||*p == 'u' ||*p == 'y' ||
+                *p == 'A' ||*p == 'E' ||*p == 'I' ||*p == 'O' ||*p == 'U' ||*p == 'Y')
+            {
+                vowel = true;
+            }
+            else
+            {
+                vowel = false;
+            }
+        }
+        ++p;
     }
-    cout << (can ? "YES" : "NO") << endl;
+    cout << (vowel ? "YES" : "NO") << endl;
     return 0;
 }

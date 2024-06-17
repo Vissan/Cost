@@ -1,30 +1,20 @@
-//4007272   Jul 3, 2013 7:54:19 PM	fuwutu	 160A - Twins	 GNU C++0x	Accepted	15 ms	0 KB
-#include <iostream>
+//4035298   Jul 7, 2013 7:23:30 PM	fuwutu	 265B - Roadside Trees (Simplified Edition)	 GNU C++0x	Accepted	31 ms	0 KB
+#include <cstdio>
 #include <algorithm>
-#include <numeric>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
-
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i)
+    int n, h, h0(0);
+    scanf("%d", &n);
+    int time = n + n - 1;
+    while (n--)
     {
-        cin >> a[i];
+        scanf("%d", &h);
+        time += abs(h - h0);
+        h0 = h;
     }
-    int value = accumulate(a.begin(), a.end(), 0) / 2;
-
-    sort(a.begin(), a.end(), greater<int>());
-    int mine = 0;
-    size_t i = 0;
-    while (mine <= value)
-    {
-        mine += a[i++];
-    }
-
-    cout << i << endl;
+    printf("%d\n", time);
     return 0;
 }

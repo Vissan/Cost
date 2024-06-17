@@ -1,19 +1,29 @@
-//4058132   Jul 13, 2013 10:10:07 AM	fuwutu	 322A - Ciel and Dancing	 GNU C++0x	Accepted	 15 ms	 0 KB
-#include <iostream>
-
-using namespace std;
+//4057937   Jul 13, 2013 9:13:14 AM	fuwutu	 116B - Little Pigs and Wolves	 GNU C++0x	Accepted	 15 ms	 0 KB
+#include <cstdio>
 
 int main()
 {
     int n, m;
-    cin >> n >> m;
-    cout << n + m - 1 << endl;
-    for (int i = 1; i <= m; ++i)
+    char c[12][13];
+    scanf("%d%d", &n, &m);
+    for (int i = 1; i <= n; ++i)
     {
-        cout << "1 " << i << endl;
+        scanf("%s", &c[i][1]);
     }
-    for (int i = 2; i <= n; ++i)
+    int eaten(0);
+    for (int i = 1; i <= n; ++i)
     {
-        cout << i << " 1" << endl;
+        for (int j = 1; j <= m; ++j)
+        {
+            if (c[i][j] == 'W')
+            {
+                if (c[i-1][j] == 'P' || c[i+1][j] == 'P' || c[i][j-1] == 'P' || c[i][j+1] == 'P')
+                {
+                    eaten += 1;
+                }
+            }
+        }
     }
+    printf("%d\n", eaten);
+    return 0;
 }

@@ -1,81 +1,59 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
+#include <cstddef> // For std::size_t (if you need an iteration count type)
 
-// 防止编译器优化
-volatile long long sum;
-volatile double float_sum;
+// 假设有一个简单的枚举类型
+enum DataType {
+    INT_TYPE,
+    LONG_LONG_TYPE,
+    FLOAT_TYPE,
+    BOOL_TYPE,
+    CHAR_TYPE,
+    POINTER_TYPE
+};
 
-void simple_addition(int a, int b) {
-    sum += a + b;
-}
+void performOperations(DataType type, std::size_t iterations) {
+    int intVar = 0;
+    long long longVar = 0;
+    float floatVar = 0.0f;
+    bool boolVar = false;
+    char charVar = 'A';
+    int* ptrVar = &intVar; // 指针类型
 
-void simple_multiplication(int a, int b) {
-    sum += a * b;
-}
-
-void simple_if_else(int a, int b) {
-    if (a > b) {
-        sum += a;
-    } else {
-        sum += b;
+    while (iterations--) {
+        switch (type) {
+            case INT_TYPE:
+                intVar++;
+                break;
+            case LONG_LONG_TYPE:
+                longVar += 2LL;
+                break;
+            case FLOAT_TYPE:
+                floatVar += 0.5f;
+                break;
+            case BOOL_TYPE:
+                boolVar = !boolVar;
+                break;
+            case CHAR_TYPE:
+                charVar = (char)((charVar - 'A' + 1) % 26 + 'A');
+                break;
+            case POINTER_TYPE:
+                // 注意：这里仅作为示例，实际中不建议对指针进行算术运算
+                // 除非你知道自己在做什么，并且知道结果是什么
+                ptrVar++; // 仅增加指针的值，不改变它所指向的内容
+                break;
+            default:
+                // 通常你会在这里处理错误，但在这个例子中我们什么也不做
+                break;
+        }
     }
-}
 
-void simple_for_loop(int n) {
-    for (int i = 0; i < n; ++i) {
-        sum += i;
-    }
-}
-
-void simple_while_loop(int n) {
-    int i = 0;
-    while (i < n) {
-        sum += i;
-        ++i;
-    }
-}
-
-void simple_do_while_loop(int n) {
-    int i = 0;
-    do {
-        sum += i;
-        ++i;
-    } while (i < n);
-}
-
-void simple_vector_operations(const std::vector<int>& numbers) {
-    for (const auto& num : numbers) {
-        sum += num;
-    }
-}
-
-void simple_float_operations(const std::vector<double>& numbers) {
-    for (const auto& num : numbers) {
-        float_sum += std::sqrt(num);
-    }
+    // 注意：这里没有打印语句
 }
 
 int main() {
-    std::vector<int> int_numbers(100);
-    std::vector<double> float_numbers(100);
-
-    for (int i = 0; i < 100; ++i) {
-        int_numbers[i] = i + 1;
-        float_numbers[i] = static_cast<double>(i) + 0.5;
-    }
-
-    sum = 0;
-    float_sum = 0.0;
-
-    simple_addition(3, 5);
-    simple_multiplication(3, 5);
-    simple_if_else(5, 10);
-    simple_for_loop(10);
-    simple_while_loop(10);
-    simple_do_while_loop(10);
-    simple_vector_operations(int_numbers);
-    simple_float_operations(float_numbers);
+    performOperations(INT_TYPE, 10);
+    performOperations(LONG_LONG_TYPE, 5);
+    // ... 其他类型的操作 ...
+    performOperations(POINTER_TYPE, 3); // 注意：这里仅用于演示，实际用途有限
 
     return 0;
 }

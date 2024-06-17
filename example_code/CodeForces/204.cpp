@@ -1,21 +1,16 @@
-//4265426   Aug 11, 2013 3:03:02 PM	fuwutu	 40A - Find Color	 GNU C++0x	Accepted	 30 ms	 0 KB
+//4263502   Aug 11, 2013 6:01:01 AM 	fuwutu 	268C - Beautiful Sets of Points 	GNU C++0x 	Accepted 	30 ms 	0 KB
 #include <cstdio>
-#include <cmath>
+#include <algorithm>
 
 int main()
 {
-    int x, y;
-    scanf("%d%d", &x, &y);
-    int r2 = x * x + y * y;
-    int r = floor(sqrt(static_cast<double>(r2)));
-    if (r * r < r2 && (r + 1) * (r + 1) > r2
-        && (r % 2 == 1 && x * y > 0 || r % 2 == 0 && x * y < 0))
+    int n, m;
+    scanf("%d%d", &n, &m);
+    int k = std::min(n, m);
+    printf("%d\n", k + 1);
+    for (int i = 0; i <= k; ++i)
     {
-        printf("white\n");
-    }
-    else
-    {
-        printf("black\n");
+        printf("%d %d\n", i, k - i);
     }
     return 0;
 }

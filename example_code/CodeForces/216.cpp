@@ -1,24 +1,20 @@
-//4027387   Jul 5, 2013 6:31:42 PM	fuwutu	 61A - Ultra-Fast Mathematician	 GNU C++0x	Accepted	15 ms	0 KB
+//4057570   Jul 13, 2013 7:06:56 AM	fuwutu	 276B - Little Girl and Game	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <string>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    string s1, s2;
-    cin >> s1 >> s2;
-    for (size_t i = 0; i < s1.length(); ++i)
+    string s;
+    cin >> s;
+
+    bool odd[26] = {false};
+    for (size_t i = 0; i < s.length(); ++i)
     {
-        if (s1[i] == s2[i])
-        {
-            s1[i] = '0';
-        }
-        else
-        {
-            s1[i] = '1';
-        }
+        odd[s[i]-'a'] = !odd[s[i]-'a'];
     }
-    cout << s1 << endl;
+    int oddcount = count(odd, odd + sizeof(odd) / sizeof(odd[0]), true);
+    cout << (oddcount == 0 || oddcount % 2 == 1 ? "First" : "Second") << endl;
     return 0;
 }

@@ -1,32 +1,28 @@
-//4034860   Jul 7, 2013 5:08:41 PM	fuwutu	 80A - Panoramixs Prediction	 GNU C++0x	Accepted	15 ms	0 KB
-#include <iostream>
+//4035087   Jul 7, 2013 6:20:05 PM	fuwutu	 284B - Cows and Poker Game	 GNU C++0x	Accepted	15 ms	200 KB
+#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
-bool isprime(int n)
-{
-    for (int i = 2; i * i <= n; ++i)
-    {
-        if (n % i == 0)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-
-    int next = n + 1;
-    while (!isprime(next))
+    int n;
+    char ch[200001];
+    scanf("%d%s", &n, ch);
+    int allin = count(ch, ch + n, 'A');
+    int in = count(ch, ch + n, 'I');
+    int folded = count(ch, ch + n, 'F');
+    if (in == 1)
     {
-        next += 1;
+        printf("1\n");
     }
-
-    cout << (next == m ? "YES" : "NO") << endl;
-
+    else if (in == 0)
+    {
+        printf("%d\n", allin);
+    }
+    else
+    {
+        printf("0\n");
+    }
     return 0;
 }

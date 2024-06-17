@@ -1,27 +1,32 @@
-//4033248   Jul 7, 2013 9:12:31 AM	fuwutu	 294A - Shaass and Oskols	 GNU C++0x	Accepted	15 ms	0 KB
-#include <iostream>
-
-using namespace std;
+//4306556	 Aug 18, 2013 7:48:28 AM	fuwutu	 66B - Petya and Countryside	 GNU C++0x	Accepted	30 ms	0 KB
+#include <cstdio>
 
 int main()
 {
-    int n, m, a[100+2], x, y;
-    cin >> n;
-    for (int i = 1; i <= n; ++i)
+    int n, height[1000], left[1000] = {0}, right[1000] = {0};
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i)
     {
-        cin >> a[i];
+        scanf("%d", &height[i]);
     }
-    cin >> m;
-    while (m--)
+
+    for (int i = 1; i < n; ++i)
     {
-        cin >> x >> y;
-        a[x-1] += (y - 1);
-        a[x+1] += (a[x] - y);
-        a[x] = 0;
+        left[i] = (height[i] >= height[i-1] ? left[i-1] + 1 : 0);
     }
-    for (int i = 1; i <= n; ++i)
+    for (int i = n - 2; i >= 0; --i)
     {
-        cout << a[i] << endl;
+        right[i] = (height[i] >= height[i+1] ? right[i+1] + 1 : 0);
     }
+
+    int maximal(0);
+    for (int i = 0; i < n; ++i)
+    {
+        if (left[i] + right[i] + 1 > maximal)
+        {
+            maximal = left[i] + right[i] + 1;
+        }
+    }
+    printf("%d\n", maximal);
     return 0;
 }

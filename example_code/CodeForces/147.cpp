@@ -1,28 +1,33 @@
-//4035087   Jul 7, 2013 6:20:05 PM	fuwutu	 284B - Cows and Poker Game	 GNU C++0x	Accepted	15 ms	200 KB
+//4239012   Aug 7, 2013 10:06:36 AM	fuwutu	 4B - Before an Exam	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <cstdio>
+#include <numeric>
 #include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    char ch[200001];
-    scanf("%d%s", &n, ch);
-    int allin = count(ch, ch + n, 'A');
-    int in = count(ch, ch + n, 'I');
-    int folded = count(ch, ch + n, 'F');
-    if (in == 1)
+    int d, sumTime, minTime[30], maxTime[30];
+    scanf("%d%d", &d, &sumTime);
+    for (int i = 0; i < d; ++i)
     {
-        printf("1\n");
+        scanf("%d%d", &minTime[i], &maxTime[i]);
     }
-    else if (in == 0)
+    int minTimeSum = accumulate(minTime, minTime + d, 0);
+    int maxTimeSum = accumulate(maxTime, maxTime + d, 0);
+    if (minTimeSum <= sumTime && sumTime <= maxTimeSum)
     {
-        printf("%d\n", allin);
+        printf("YES\n");
+        for (int i = 0; i < d; ++i)
+        {
+            int t = min(minTime[i] + sumTime - minTimeSum, maxTime[i]);
+            printf((i + 1 < d ? "%d " : "%d\n"), t);
+            sumTime -= (t - minTime[i]);
+        }
     }
     else
     {
-        printf("0\n");
+        printf("NO\n");
     }
     return 0;
 }

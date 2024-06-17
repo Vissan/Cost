@@ -1,51 +1,29 @@
-//4263324   Aug 11, 2013 5:07:31 AM 	fuwutu 	298B - Sail 	GNU C++0x 	Accepted 	62 ms 	300 KB
+//4027443   Jul 5, 2013 6:45:49 PM	fuwutu	 69A - Young Physicist	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    int t, sx, sy, ex, ey, time(-1);
-    string wind;
-    cin >> t >> sx >> sy >> ex >> ey >> wind;
-    for (int i = 0; i < t; ++i)
+    int n, x, y, z, xsum(0), ysum(0), zsum(0);
+    cin >> n;
+
+    while (n--)
     {
-        switch (wind[i])
-        {
-        case 'E':
-            if (sx < ex)
-            {
-                sx += 1;
-            }
-            break;
-        case 'S':
-            if (sy > ey)
-            {
-                sy -= 1;
-            }
-            break;
-        case 'W':
-            if (sx > ex)
-            {
-                sx -= 1;
-            }
-            break;
-        case 'N':
-            if (sy < ey)
-            {
-                sy += 1;
-            }
-            break;
-        default:
-            break;
-        }
-        if (sx == ex && sy == ey)
-        {
-            time = i + 1;
-            break;
-        }
+        cin >> x >> y >> z;
+        xsum += x;
+        ysum += y;
+        zsum += z;
     }
-    cout << time << endl;
+
+    if (xsum == 0 && ysum == 0 && zsum == 0)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+
     return 0;
 }

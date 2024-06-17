@@ -1,19 +1,28 @@
-//4362875	 Aug 28, 2013 7:34:17 PM	fuwutu	 339B - Xenia and Ringroad	 GNU C++0x	Accepted	62 ms	0 KB
-#include <cstdio>
+//4076484   Jul 15, 2013 7:47:42 PM	fuwutu	 260A - Adding Digits	 GNU C++0x	Accepted	15 ms	100 KB
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 int main()
 {
-    int n, m, a0, a, cycle = 0;
-    scanf("%d%d%d", &n, &m, &a0);
-    while (--m)
+    int a, b, n;
+    cin >> a >> b >> n;
+    bool exist(false);
+    for (int i = 0; i < 10; ++i)
     {
-        scanf("%d", &a);
-        if (a0 > a)
+        if ((a * 10 + i) % b == 0)
         {
-            cycle += 1;
+            cout << a * 10 + i;
+            string s(n - 1, '0');
+            cout << s << endl;
+            exist = true;
+            break;
         }
-        a0 = a;
     }
-    printf("%I64d\n", static_cast<long long>(n) * static_cast<long long>(cycle) + a0 - 1);
+    if (!exist)
+    {
+        cout << -1 << endl;
+    }
     return 0;
 }

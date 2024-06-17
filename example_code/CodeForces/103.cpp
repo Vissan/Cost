@@ -1,23 +1,52 @@
-//4033438   Jul 7, 2013 10:40:48 AM	fuwutu	 246A - Buggy Sorting	 GNU C++0x	Accepted	15 ms	0 KB
+//4215779   Aug 2, 2013 10:27:41 AM	fuwutu	 316A2 - Special Task (70 points)	 GNU C++0x	Accepted	30 ms	300 KB
 #include <iostream>
+#include <string>
+#include <numeric>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
-    if (n > 2)
+    string s;
+    cin >> s;
+
+    int letter[128] = {0}, zero = 0;
+    for (size_t i = 0; i < s.length(); ++i)
     {
-        for (int i = 2; i <= n; ++i)
+        if (s[i] >= 'A' && s[i] < 'K')
         {
-            cout << i << " ";
+            letter[s[i]] = 1;
         }
-        cout << 1 << endl;
+        else if (s[i] == '?')
+        {
+            zero += 1;
+        }
     }
-    else
+
+    int result = 1;
+    int lettercount = accumulate(letter + 'A', letter + 'K', 0);
+    if (lettercount > 0)
     {
-        cout << -1 << endl;
+        if (s[0] >= 'A' && s[0] < 'K')
+        {
+            result *= 9;
+        }
+        else
+        {
+            result *= 10;
+        }
     }
-    return 0;
+    for (int i = 1; i < lettercount; ++i)
+    {
+        result *= (10 - i);
+    }
+
+    if (zero > 0 && s[0] == '?')
+    {
+        result *= 9;
+        zero -= 1;
+    }
+
+    string padding(zero, '0');
+    cout << result << padding << endl;
 }

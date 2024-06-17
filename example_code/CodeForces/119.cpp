@@ -1,24 +1,30 @@
-//4033603   Jul 7, 2013 11:36:30 AM	fuwutu	 263B - Squares	 GNU C++0x	Accepted	 15 ms	 0 KB
-#include <iostream>
+//4188914   Jul 27, 2013 4:36:49 PM	fuwutu	 333B - Chips	 GNU C++0x	Accepted	62 ms	0 KB
+#include <cstdio>
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
 int main()
 {
-    int n, k, a[50+1];
-    cin >> n >> k;
-    for (int i = 0; i < n; ++i)
-        cin >> a[i];
-    sort(a, a + n, greater<int>());
-    a[n] = 0;
-    if (k > n)
+    int n, m, x, y, row[1001], col[1001];
+    scanf("%d%d", &n, &m);
+    fill(row + 1, row + n + 1, 1);
+    fill(col + 1, col + n + 1, 1);
+
+    while (m--)
     {
-        cout << -1 << endl;
+        scanf("%d%d", &x, &y);
+        row[x] = 0;
+        col[y] = 0;
     }
-    else
+
+    int points = accumulate(row + 2, row + n, 0) + accumulate(col + 2, col + n, 0);
+    if (n >= 3 && n % 2 == 1 && row[n / 2 + 1] == 1 && col[n / 2 + 1] == 1)
     {
-        cout << a[k-1] << " " << 0 << endl;
+        points -= 1;
     }
+
+    printf("%d\n", points);
     return 0;
 }

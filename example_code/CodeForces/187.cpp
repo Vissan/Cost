@@ -1,45 +1,96 @@
-//4176866   Jul 27, 2013 12:50:16 PM	fuwutu	 334B - Eight Point Sets	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <iostream>
+//4304346	 Aug 17, 2013 7:38:25 PM	fuwutu	 254A - Cards with Numbers	 GNU C++0x	Accepted	530 ms	4800 KB
+#include <cstdio>
 #include <algorithm>
 
 using namespace std;
 
-struct point
-{
-    int x;
-    int y;
-};
-
-bool cmp(const point& left, const point& right)
-{
-    return (left.x < right.x)
-        || (left.x == right.x && left.y < right.y);
-}
-
 int main()
 {
-    point p[8];
-    for (int i = 0; i < 8; ++i)
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+
+    int n;
+    scanf("%d", &n);
+
+    pair<int, int>* x = new pair<int, int>[n * 2];
+    for (int i = 0; i < n * 2; ++i)
     {
-        cin >> p[i].x >> p[i].y;
+        scanf("%d", &x[i].first);
+        x[i].second = i + 1;
     }
-    sort(p, p + 8, cmp);
-    if (   p[0].x == p[1].x && p[1].x == p[2].x
-        && p[2].x != p[3].x
-        && p[3].x == p[4].x
-        && p[4].x != p[5].x
-        && p[5].x == p[6].x && p[6].x == p[7].x
-        && p[0].y == p[3].y && p[3].y == p[5].y
-        && p[5].y != p[1].y
-        && p[1].y == p[6].y
-        && p[6].y != p[2].y
-        && p[2].y == p[4].y && p[4].y == p[7].y)
+
+    sort(x, x + n * 2);
+    bool possible = true;
+    for (int i = 0; i < n * 2; i += 2)
     {
-        cout << "respectable" << endl;
+        if (x[i].first != x[i+1].first)
+        {
+            possible = false;
+            break;
+        }
+    }
+
+    if (possible)
+    {
+        for (int i = 0; i < n * 2; i += 2)
+        {
+            printf("%d %d\n", x[i].second, x[i+1].second);
+        }
     }
     else
     {
-        cout << "ugly" << endl;
+        printf("-1\n");
     }
+
+    delete[] x;
+    return 0;
+}
+
+
+//4304381	 Aug 17, 2013 7:46:43 PM	fuwutu	 254A - Cards with Numbers	 GNU C++0x	Accepted	404 ms	6900 KB
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+
+    int n, a;
+    vector<int> index[5001];
+    scanf("%d", &n);
+    for (int i = 1; i <= n * 2; ++i)
+    {
+        scanf("%d", &a);
+        index[a].push_back(i);
+    }
+
+    bool possible = true;
+    for (int i = 1; i < 5001; ++i)
+    {
+        if (index[i].size() % 2 == 1)
+        {
+            possible = false;
+            break;
+        }
+    }
+
+    if (possible)
+    {
+        for (int i = 1; i < 5001; ++i)
+        {
+            for (size_t j = 0; j < index[i].size(); j += 2)
+            {
+                printf("%d %d\n", index[i][j], index[i][j+1]);
+            }
+        }
+    }
+    else
+    {
+        printf("-1\n");
+    }
+
     return 0;
 }

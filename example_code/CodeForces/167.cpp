@@ -1,25 +1,22 @@
-//4278687 	Aug 14, 2013 8:29:33 PM 	fuwutu 	315A - Sereja and Bottles 	GNU C++0x 	Accepted 	30 ms 	0 KB
+//4055785   Jul 12, 2013 8:36:40 PM	fuwutu	 81A - Plug-in	 GNU C++0x	Accepted	15 ms	200 KB
 #include <cstdio>
 
 int main()
 {
-    int n, a[1000], b[1000], c[1001] = {0};
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    char ch[200001];
+    scanf("%s", ch);
+    char* p = ch;
+    int n = 0;
+    while (*p != 0)
     {
-        scanf("%d%d", &a[i], &b[i]);
-        c[b[i]] += 1;
-    }
-    int count = 0;
-    for (int i = 0; i < n; ++i)
-    {
-        c[b[i]] -= 1;
-        if (c[a[i]] == 0)
+        ch[n++] = *p;
+        if (n >= 2 && ch[n-1] == ch[n-2])
         {
-            count += 1;
+            n -= 2;
         }
-        c[b[i]] += 1;
+        ++p;
     }
-    printf("%d\n", count);
+    ch[n] = 0;
+    printf("%s\n", ch);
     return 0;
 }

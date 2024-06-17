@@ -1,54 +1,52 @@
-//4057396   Jul 13, 2013 6:22:17 AM	fuwutu	 291B - Command Line Arguments	 GNU C++0x	Accepted	62 ms	100 KB
+//4172301   Jul 27, 2013 5:23:55 AM	fuwutu	 63A - Sinking Ship	 GNU C++0x	Accepted	30 ms	100 KB
 #include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 int main()
 {
-    char s[100001];
-    string lexeme;
-    cin.getline(s, sizeof(s) / sizeof(s[0]));
-    char* p = s;
-    bool quote(false);
-    while (*p != 0)
+    int n;
+    cin >> n;
+
+    string name, status;
+    vector<string> rats, womenandchildren, men, captain;
+    while (n--)
     {
-        if (quote)
+        cin >> name >> status;
+        if (status == "rat")
         {
-            if (*p != '\"')
-            {
-                lexeme.push_back(*p);
-            }
-            else
-            {
-                cout << "<" << lexeme << ">" << endl;
-                lexeme.clear();
-                quote = false;
-            }
+            rats.push_back(name);
+        }
+        else if (status == "woman" || status == "child")
+        {
+            womenandchildren.push_back(name);
+        }
+        else if (status == "man")
+        {
+            men.push_back(name);
         }
         else
         {
-            if (*p == '\"')
-            {
-                quote = true;
-            }
-            else if (*p == ' ')
-            {
-                if (!lexeme.empty())
-                {
-                    cout << "<" << lexeme << ">" << endl;
-                    lexeme.clear();
-                }
-            }
-            else
-            {
-                lexeme.push_back(*p);
-            }
+            captain.push_back(name);
         }
-        ++p;
     }
-    if (!lexeme.empty())
+    for (auto one : rats)
     {
-        cout << "<" << lexeme << ">" << endl;
+        cout << one << endl;
+    }
+    for (auto one : womenandchildren)
+    {
+        cout << one << endl;
+    }
+    for (auto one : men)
+    {
+        cout << one << endl;
+    }
+    for (auto one : captain)
+    {
+        cout << one << endl;
     }
     return 0;
 }

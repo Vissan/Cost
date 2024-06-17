@@ -1,24 +1,33 @@
-//4004040   Jul 2, 2013 8:47:17 PM	fuwutu	 71A - Way Too Long Words	 GNU C++0x	Accepted	 15 ms	 0 KB
-#include <iostream>
-
-using namespace std;
+//4057901   Jul 13, 2013 8:57:44 AM	fuwutu	 279B - Books	 GNU C++0x	Accepted	31 ms	400 KB
+#include <cstdio>
 
 int main()
 {
-    int n;
-    string s;
-    cin >> n;
-    while (n--)
+    int n, t, a[100000];
+    scanf("%d%d", &n, &t);
+    for (int i = 0; i < n; ++i)
     {
-        cin >> s;
-        if (s.length() > 10)
+        scanf("%d", &a[i]);
+    }
+
+    int j(0), time(0);
+    while (j < n && time + a[j] <= t)
+    {
+        time += a[j++];
+    }
+    int maximum(j);
+    for (int i = 0; i < n; ++i)
+    {
+        time -= a[i];
+        while (j < n && time + a[j] <= t)
         {
-            cout << s[0] << s.length() - 2 << s[s.length() - 1] << endl;
+            time += a[j++];
         }
-        else
+        if (j - i - 1 > maximum)
         {
-            cout << s << endl;
+            maximum = j - i - 1;
         }
     }
+    printf("%d\n", maximum);
     return 0;
 }

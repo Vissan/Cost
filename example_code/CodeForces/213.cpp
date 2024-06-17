@@ -1,38 +1,33 @@
-//4027656   Jul 5, 2013 7:34:35 PM	fuwutu	 58A - Chat room	 GNU C++0x	Accepted	15 ms	0 KB
-#include <iostream>
-#include <string>
+//4265639   Aug 11, 2013 3:54:36 PM	fuwutu	 272B - Dima and Sequence	 GNU C++0x	Accepted	62 ms	0 KB
+#include <cstdio>
 
 using namespace std;
 
+int bitcount(int n) 
+{ 
+    n = (n & 0x55555555) + ((n >> 1) & 0x55555555) ; 
+    n = (n & 0x33333333) + ((n >> 2) & 0x33333333) ; 
+    n = (n & 0x0f0f0f0f) + ((n >> 4) & 0x0f0f0f0f) ; 
+    n = (n & 0x00ff00ff) + ((n >> 8) & 0x00ff00ff) ; 
+    n = (n & 0x0000ffff) + ((n >> 16) & 0x0000ffff) ; 
+    return n ; 
+}
+
 int main()
 {
-    string s;
-    cin >> s;
-
-    size_t pos = 0;
-    while (pos < s.length() && s[pos] != 'h')
-        ++pos;
-    ++pos;
-    while (pos < s.length() && s[pos] != 'e')
-        ++pos;
-    ++pos;
-    while (pos < s.length() && s[pos] != 'l')
-        ++pos;
-    ++pos;
-    while (pos < s.length() && s[pos] != 'l')
-        ++pos;
-    ++pos;
-    while (pos < s.length() && s[pos] != 'o')
-        ++pos;
-
-    if (pos < s.length())
+    int n, a, c[32] = {0};
+    scanf("%d", &n);
+    while (n--)
     {
-        cout << "YES" << endl;
-    }
-    else
-    {
-        cout << "NO" << endl;
+        scanf("%d", &a);
+        c[bitcount(a)] += 1;
     }
 
+    long long answer = 0;
+    for (size_t i = 0; i < sizeof(c) / sizeof(c[0]); ++i)
+    {
+        answer += static_cast<long long>(c[i]) * static_cast<long long>(c[i] - 1) / 2;
+    }
+    printf("%I64d\n", answer);
     return 0;
 }

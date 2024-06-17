@@ -1,30 +1,63 @@
-//4306015	 Aug 18, 2013 4:11:33 AM	fuwutu	 7A - Kalevitch and Chess	 GNU C++0x	Accepted	30 ms	0 KB
+//4306626	 Aug 18, 2013 8:16:30 AM	fuwutu	 284A - Cows and Primitive Roots	 GNU C++0x	Accepted	62 ms	0 KB
 #include <cstdio>
-#include <algorithm>
-
-using namespace std;
 
 int main()
 {
-    char s[9];
-    bool row[8] = {false}, col[8] = {false};
-    for (int r = 0; r < 8; ++r)
+    int p, count(0);
+    scanf("%d", &p);
+    for (int n = 1; n < p; ++n)
     {
-        scanf("%s", s);
-        for (int c = 0; c < 9; ++c)
+        bool ok = true;
+        int x = 1;
+        for (int i = 1; i < p - 1; ++i)
         {
-            if (s[c] == 'W')
+            x *= n;
+            x %= p;
+            if (x == 1)
             {
-                row[r] = true;
-                col[c] = true;
+                ok = false;
+                break;
+            }
+        }
+        if (ok)
+        {
+            x *= n;
+            x %= p;
+            if (x == 1)
+            {
+                count += 1;
             }
         }
     }
-    int answer = 16 - count(row, row + 8, true) - count(col, col + 8, true);
-    if (answer == 16)
+    printf("%d\n", count);
+    return 0;
+}
+
+
+//4306655	 Aug 18, 2013 8:36:13 AM	fuwutu	 284A - Cows and Primitive Roots	 GNU C++0x	Accepted	30 ms	0 KB
+#include <cstdio>
+
+int main()
+{
+    int p;
+    scanf("%d", &p);
+    int n = p - 1;
+    int count = n;
+    for (int i = 2; i * i <= n; ++i)
     {
-        answer = 8;
+        if (n % i == 0)
+        {
+            do
+            {
+                n /= i;
+            } while (n % i == 0);
+            count = count / i * (i - 1);
+        }
     }
-    printf("%d\n", answer);
+    if (n != 1)
+    {
+        count = count / n * (n - 1);
+    }
+    printf("%d\n", count);
     return 0;
 }

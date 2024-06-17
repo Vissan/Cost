@@ -1,19 +1,32 @@
-//4034903   Jul 7, 2013 5:22:04 PM	fuwutu	 318A - Even Odds	 GNU C++0x	Accepted	15 ms	0 KB
+//4007191   Jul 3, 2013 7:32:32 PM	fuwutu	 96A - Football	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    long long n, k;
-    cin >> n >> k;
-    if (k <= (n + 1) / 2)
+    string s;
+    cin >> s;
+
+    int contiguous = 1;
+    for (size_t i = 1; i < s.length(); ++i)
     {
-        cout << k * 2 - 1 << endl;
+        if (s[i] == s[i - 1])
+        {
+            contiguous += 1;
+            if (contiguous == 7)
+            {
+                cout << "YES" << endl;
+                return 0;
+            }
+        }
+        else
+        {
+            contiguous = 1;
+        }
     }
-    else
-    {
-        cout << (k - (n + 1) / 2) * 2 << endl;
-    }
+
+    cout << "NO" << endl;
     return 0;
 }

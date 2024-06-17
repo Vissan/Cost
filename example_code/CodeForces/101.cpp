@@ -1,27 +1,52 @@
-//4057519   Jul 13, 2013 6:52:47 AM	fuwutu	 245A - System Administrator	 GNU C++0x	Accepted	15 ms	0 KB
+//4215774   Aug 2, 2013 10:26:21 AM	fuwutu	 316A1 - Special Task (30 points)	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <iostream>
+#include <string>
+#include <numeric>
 
 using namespace std;
 
 int main()
 {
-    int n, t, x, y, xa(0), ya(0), xb(0), yb(0);
-    cin >> n;
-    while (n--)
+    string s;
+    cin >> s;
+
+    int letter[128] = {0}, zero = 0;
+    for (size_t i = 0; i < s.length(); ++i)
     {
-        cin >> t >> x >> y;
-        if (t == 1)
+        if (s[i] >= 'A' && s[i] < 'K')
         {
-            xa += x;
-            ya += y;
+            letter[s[i]] = 1;
+        }
+        else if (s[i] == '?')
+        {
+            zero += 1;
+        }
+    }
+
+    int result = 1;
+    int lettercount = accumulate(letter + 'A', letter + 'K', 0);
+    if (lettercount > 0)
+    {
+        if (s[0] >= 'A' && s[0] < 'K')
+        {
+            result *= 9;
         }
         else
         {
-            xb += x;
-            yb += y;
+            result *= 10;
         }
     }
-    cout << (xa >= ya ? "LIVE" : "DEAD") << endl;
-    cout << (xb >= yb ? "LIVE" : "DEAD") << endl;
-    return 0;
+    for (int i = 1; i < lettercount; ++i)
+    {
+        result *= (10 - i);
+    }
+
+    if (zero > 0 && s[0] == '?')
+    {
+        result *= 9;
+        zero -= 1;
+    }
+
+    string padding(zero, '0');
+    cout << result << padding << endl;
 }

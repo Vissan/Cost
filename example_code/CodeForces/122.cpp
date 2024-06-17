@@ -1,20 +1,74 @@
-//4035298   Jul 7, 2013 7:23:30 PM	fuwutu	 265B - Roadside Trees (Simplified Edition)	 GNU C++0x	Accepted	31 ms	0 KB
+//4331873	 Aug 24, 2013 1:46:14 PM	fuwutu	 335A - Banana	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <cstdio>
-#include <algorithm>
-
-using namespace std;
+#include <cstring>
 
 int main()
 {
-    int n, h, h0(0);
-    scanf("%d", &n);
-    int time = n + n - 1;
-    while (n--)
+    char s[1000];
+    int n, count1[128] = {0}, count2[128] = {0};
+    
+    scanf("%s%d", s, &n);
+    for (int i = 0; i < strlen(s); ++i)
     {
-        scanf("%d", &h);
-        time += abs(h - h0);
-        h0 = h;
+        count1[s[i]] += 1;
     }
-    printf("%d\n", time);
+
+    int letters = 0;
+    for (int i = 'a'; i <= 'z'; ++i)
+    {
+        if (count1[i] != 0)
+        {
+            letters += 1;
+        }
+    }
+
+    if (letters <= n)
+    {
+        while (n--)
+        {
+            int numerator = 1001, denominator = 1, index = 0;
+            for (int i = 'a'; i <= 'z'; ++i)
+            {
+                if (count1[i] != 0)
+                {
+                    if (count2[i] * denominator < numerator * count1[i])
+                    {
+                        numerator = count2[i];
+                        denominator = count1[i];
+                        index = i;
+                    }
+                }
+            }
+            count2[index] += 1;
+        }
+
+        int sheets = 0;
+        for (int i = 'a'; i <= 'z'; ++i)
+        {
+            if (count2[i] != 0)
+            {
+                int temp = (count1[i] + count2[i] - 1) / count2[i];
+                if (temp > sheets)
+                {
+                    sheets = temp;
+                }
+            }
+        }
+        printf("%d\n", sheets);
+
+        for (int i = 'a'; i <= 'z'; ++i)
+        {
+            while (count2[i]--)
+            {
+                printf("%c", i);
+            }
+        }
+        printf("\n");
+    }
+    else
+    {
+        printf("-1\n");
+    }
+
     return 0;
 }

@@ -1,21 +1,15 @@
-//4236727   Aug 6, 2013 3:44:49 PM	fuwutu	 332A - Down the Hatch!	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <iostream>
-#include <string>
-
-using namespace std;
+//4058029   Jul 13, 2013 9:37:53 AM	fuwutu	 246B - Increase and Decrease	 GNU C++0x	Accepted	 15 ms	 0 KB
+#include <cstdio>
 
 int main()
 {
-    int n, glasses(0);
-    string s;
-    cin >> n >> s;
-    for (int i = n; i < s.length(); i += n)
+    int n, a, sum(0);
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i)
     {
-        if (s[i-1] == s[i-2] && s[i-2] == s[i-3])
-        {
-            ++glasses;
-        }
+        scanf("%d", &a);
+        sum += a;
     }
-    cout << glasses << endl;
+    printf("%d\n", sum % n == 0 ? n : n - 1);
     return 0;
 }

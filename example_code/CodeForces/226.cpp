@@ -1,59 +1,24 @@
-//4266560   Aug 11, 2013 7:04:01 PM	fuwutu	 79A - Bus Game	 GNU C++0x	Accepted	30 ms	0 KB
+//4237725   Aug 6, 2013 9:18:15 PM 	fuwutu 	282C - XOR and OR 	GNU C++0x 	Accepted 	280 ms 	3100 KB
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int x, y;
-    cin >> x >> y;
-    int turns = min(x / 2, y / 24);
-    x -= 2 * turns;
-    y -= 24 * turns;
-
-    while (true)
+    string a, b;
+    cin >> a >> b;
+    bool can(false);
+    if (a.length() == b.length())
     {
-        if (x >= 2 && y >= 2)
-        {
-            x -= 2;
-            y -= 2;
-        }
-        else if (x >= 1 && y >= 12)
-        {
-            x -= 1;
-            y -= 12;
-        }
-        else if (y >= 22)
-        {
-            y -= 22;
-        }
-        else
-        {
-            cout << "Hanako" << endl;
-            break;
-        }
-
-        if (y >= 22)
-        {
-            y -= 22;
-        }
-        else if (x >= 1 && y >= 12)
-        {
-            x -= 1;
-            y -= 12;
-        }
-        else if (x >= 2 && y >= 2)
-        {
-            x -= 2;
-            y -= 2;
-        }
-        else
-        {
-            cout << "Ciel" << endl;
-            break;
-        }
+        size_t ia(0), ib(0);
+        while (ia < a.length() && a[ia] == '0')
+            ++ia;
+        while (ib < b.length() && b[ib] == '0')
+            ++ib;
+        if ((ia < a.length() && ib < b.length())
+            || (ia == a.length() && ib == b.length()))
+            can = true;
     }
-
+    cout << (can ? "YES" : "NO") << endl;
     return 0;
 }

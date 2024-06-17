@@ -1,39 +1,13 @@
-//4124738   Jul 21, 2013 4:00:21 AM	fuwutu	 3A - Shortest path of the king	 GNU C++0x	Accepted	 15 ms	 0 KB
+//4027723   Jul 5, 2013 7:56:08 PM	fuwutu	 268B - Buttons	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    string s, t;
-    cin >> s >> t;
-    cout << max(abs(s[0] - t[0]), abs(s[1] - t[1])) << endl;
-    while (s != t)
-    {
-        if (s[0] < t[0])
-        {
-            cout << "R";
-            s[0] += 1;
-        }
-        else if (s[0] > t[0])
-        {
-            cout << "L";
-            s[0] -= 1;
-        }
-
-        if (s[1] < t[1])
-        {
-            cout << "U";
-            s[1] += 1;
-        }
-        else if (s[1] > t[1])
-        {
-            cout << "D";
-            s[1] -= 1;
-        }
-
-        cout << endl;
-    }
+    long long n;
+    cin >> n;
+    // 1*(n-1)+1 + 2*(n-2)+1 + 3*(n-3)+1 + ... + n*(n-n)+1
+    cout << (n - 1) * n * (n + 1) / 6 + n << endl;
     return 0;
 }

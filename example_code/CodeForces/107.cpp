@@ -1,35 +1,29 @@
-//4059072   Jul 13, 2013 1:57:50 PM 	fuwutu 	253A - Boys and Girls 	GNU C++0x 	Accepted 	15 ms 	200 KB
+//4240656   Aug 7, 2013 7:27:25 PM	fuwutu	 318B - Strings of Power	 GNU C++0x	Accepted	156 ms	2100 KB
 #include <iostream>
-#include <string>
-#include <fstream>
 
 using namespace std;
 
 int main()
 {
-    size_t n, m;
+    string s;
+    cin >> s;
 
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    cin >> n >> m;
-
-    if (n >= m)
+    int heavy(0);
+    long long amount(0);
+    for (size_t i = 4; i < s.length(); ++i)
     {
-        string s(n+m, 'B');
-        for (size_t i = 1; i < m * 2; i += 2)
+        if (s[i] == 'l')
         {
-            s[i] = 'G';
+            if (s[i-4] == 'm' && s[i-3] == 'e' && s[i-2] == 't' && s[i-1] == 'a')
+            {
+                amount += heavy;
+            }
         }
-        cout << s << endl;
-    }
-    else
-    {
-        string s(m+n, 'G');
-        for (size_t i = 1; i < n * 2; i += 2)
+        else if (s[i-4] == 'h' && s[i-3] == 'e' && s[i-2] == 'a' && s[i-1] == 'v' && s[i] == 'y')
         {
-            s[i] = 'B';
+            ++heavy;
         }
-        cout << s << endl;
     }
+    cout << amount << endl;
     return 0;
 }

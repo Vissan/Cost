@@ -1,23 +1,18 @@
-//4032921   Jul 7, 2013 5:54:54 AM	fuwutu	 278A - Circle Line	 GNU C++0x	Accepted	15 ms	0 KB
+//4035016   Jul 7, 2013 5:54:29 PM	fuwutu	 38A - Army	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int n, d, f[100+2] = {0}, s, t;
+    int n, d[100] = {0}, a, b;
     cin >> n;
-    for (int i = 2; i < n + 2; ++i)
+    for (int i = 1; i < n; ++i)
     {
-        cin >> d;
-        f[i] = f[i-1] + d;
+        cin >> d[i];
     }
-    cin >> s >> t;
-    if (s > t)
-    {
-        swap(s, t);
-    }
-    int distance = f[t] - f[s];
-    cout << min(distance, (f[n+1] - distance)) << endl;
+    cin >> a >> b;
+    cout << accumulate(d + a, d + b, 0) << endl;
     return 0;
 }

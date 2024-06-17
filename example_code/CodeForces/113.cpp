@@ -1,24 +1,27 @@
-//4034927   Jul 7, 2013 5:30:43 PM	fuwutu	 259A - Little Elephant and Chess	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    bool fail(false);
-    string s;
-    for (int i = 0; i < 8; ++i)
+    int n = 5; // Example number of frames
+    int a[] = {1, 2, 1, 2, 3}; // Example sizes of frames
+
+    int count[101] = {0};
+    for (int i = 0; i < n; ++i)
     {
-        cin >> s;
-        for (size_t j = 1; j < s.length(); ++j)
-        {
-            if (s[j] == s[j-1])
-            {
-                fail = true;
-            }
-        }
+        count[a[i]] += 1;
     }
-    cout << (fail ? "NO" : "YES") << endl;
+
+    int total = 0;
+    for (int i = 1; i <= 100; ++i)
+    {
+        total += count[i] / 2;
+    }
+
+    int result = total / 2;
+
+    // Now you can use the 'result' variable as needed in your program
+
     return 0;
 }

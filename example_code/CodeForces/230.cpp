@@ -1,23 +1,24 @@
-//4006861   Jul 3, 2013 5:47:02 PM	fuwutu	 82A - Double Cola	 GNU C++0x	Accepted	15 ms	0 KB
+//4033910   Jul 7, 2013 12:48:27 PM	fuwutu	 114A - Cifera	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
-
-    int r = 1;
-    while (r * 5 < n)
+    int k, l, importance(-1);
+    cin >> k >> l;
+    while (l % k == 0)
     {
-        n -= r * 5;
-        r *= 2;
+        l /= k;
+        importance += 1;
     }
-
-    string names[] = {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
-    cout << names[(n - 1) / r] << endl;
-
+    if (importance >= 0 && l == 1)
+    {
+        cout << "YES" << endl << importance << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
     return 0;
 }

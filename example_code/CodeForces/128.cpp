@@ -1,29 +1,36 @@
-//4240326   Aug 7, 2013 5:13:59 PM	fuwutu	 26A - Almost Prime	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <cstdio>
+//4302392	 Aug 17, 2013 1:03:52 PM	fuwutu	 337C - Quiz	 GNU C++0x	Accepted	 62 ms	 0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, amount(0);
-    scanf("%d", &n);
-
-    bool b[3001] = {false};
-    int pfactors[3001] = {0};
-    for (int i = 2; i <= n; ++i)
+    long long n, m, k;
+    cin >> n >> m >> k;
+    long long wrong = n - m;
+    if ((wrong + 1) * (k - 1) >= m)
     {
-        if (!b[i])
-        {
-            for (int j = i + i; j <= n; j += i)
-            {
-                b[j] = true;
-                pfactors[j] += 1;
-            }
-        }
-
-        if (pfactors[i] == 2)
-        {
-            amount += 1;
-        }
+        cout << m << endl;
     }
-    printf("%d\n", amount);
+    else
+    {
+        long long consecutive = m - wrong * (k - 1);
+        long long t = consecutive / k;
+        long long result = 1;
+        long long pow = 2;
+        long long tt = t;
+        while (tt != 0)
+        {
+            if (tt % 2 == 1)
+            {
+                result *= pow;
+                result %= 1000000009LL;
+            }
+            tt /= 2;
+            pow = pow * pow % 1000000009LL;
+        }
+        result = ((result - 1) * 2 * k+ m - t * k) % 1000000009LL;
+        cout << result << endl;
+    }
     return 0;
 }

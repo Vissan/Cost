@@ -1,15 +1,44 @@
-//4058029   Jul 13, 2013 9:37:53 AM	fuwutu	 246B - Increase and Decrease	 GNU C++0x	Accepted	 15 ms	 0 KB
-#include <cstdio>
+//4231314   Aug 5, 2013 9:18:30 AM  fuwutu  317A - Perfect Pair GNU C++0x   Accepted    62 ms   0 KB 
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
 
 int main()
 {
-    int n, a, sum(0);
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
+    long long x, y, m;
+    cin >> x >> y >> m;
+    if (x >= m || y >= m)
     {
-        scanf("%d", &a);
-        sum += a;
+        cout << 0 << endl;
     }
-    printf("%d\n", sum % n == 0 ? n : n - 1);
+    else
+    {
+        if (x <= 0 && y <= 0)
+        {
+            cout << -1 << endl;
+        }
+        else
+        {
+            if (x < y)
+            {
+                swap(x, y);
+            }
+            long long result(0);
+            if (y < 0)
+            {
+                long long n = (-y) / x + 1;
+                result += n;
+                y += x * n;
+            }
+            while (x < m)
+            {
+                y += x;
+                swap(x, y);
+                result += 1;
+            }
+            cout << result << endl;
+        }
+    }
     return 0;
 }

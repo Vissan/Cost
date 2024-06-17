@@ -1,30 +1,27 @@
-//4188914   Jul 27, 2013 4:36:49 PM	fuwutu	 333B - Chips	 GNU C++0x	Accepted	62 ms	0 KB
+//4304419	 Aug 17, 2013 7:55:55 PM	fuwutu	 252A - Little Xor	 GNU C++0x	Accepted	30 ms	0 KB
 #include <cstdio>
-#include <algorithm>
-#include <numeric>
-
-using namespace std;
 
 int main()
 {
-    int n, m, x, y, row[1001], col[1001];
-    scanf("%d%d", &n, &m);
-    fill(row + 1, row + n + 1, 1);
-    fill(col + 1, col + n + 1, 1);
-
-    while (m--)
+    int n, a, x[101] = {0};
+    scanf("%d", &n);
+    for (int i = 1; i <= n; ++i)
     {
-        scanf("%d%d", &x, &y);
-        row[x] = 0;
-        col[y] = 0;
+        scanf("%d", &a);
+        x[i] = x[i-1] ^ a;
     }
-
-    int points = accumulate(row + 2, row + n, 0) + accumulate(col + 2, col + n, 0);
-    if (n >= 3 && n % 2 == 1 && row[n / 2 + 1] == 1 && col[n / 2 + 1] == 1)
+    int maximal = 0;
+    for (int i = 0; i < n; ++i)
     {
-        points -= 1;
+        for (int j = i + 1; j <= n; ++j)
+        {
+            int xx = x[i] ^ x[j];
+            if (xx > maximal)
+            {
+                maximal = xx;
+            }
+        }
     }
-
-    printf("%d\n", points);
+    printf("%d\n", maximal);
     return 0;
 }

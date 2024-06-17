@@ -1,26 +1,29 @@
-//4436009	 Sep 9, 2013 6:53:39 PM	fuwutu	 302B - Eugeny and Play List	 GNU C++0x	Accepted	156 ms	400 KB
-#include <cstdio>
+//4172472   Jul 27, 2013 5:55:14 AM	fuwutu	 78A - Haiku	 GNU C++0x	Accepted	30 ms	0 KB
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-    int n, m, s[100001];
-    s[0] = 0;
-    scanf("%d%d", &n, &m);
-    for (int i = 1; i <= n; ++i)
+    char ch[101];
+    int syllables[3] = {5, 7, 5};
+    bool haiku(true);
+    for (int i = 0; i < 3; ++i)
     {
-        int c, t;
-        scanf("%d%d", &c, &t);
-        s[i] = s[i-1] + c * t;
-    }
-    int song = 1;
-    while (m--)
-    {
-        int v;
-        scanf("%d", &v);
-        while (v > s[song])
+        cin.getline(ch, sizeof(ch) / sizeof(ch[0]));
+        int n = 0;
+        for (int j = 0; ch[j] != 0; ++j)
         {
-            song += 1;
+            if (ch[j] == 'a' || ch[j] == 'e' || ch[j] == 'i' || ch[j] == 'o' || ch[j] == 'u')
+            {
+                n += 1;
+            }
         }
-        printf("%d\n", song);
+        if (n != syllables[i])
+        {
+            haiku = false;
+        }
     }
+    cout << (haiku ? "YES" : "NO") << endl;
+    return 0;
 }

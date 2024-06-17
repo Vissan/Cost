@@ -1,88 +1,43 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
+#include <iostream> // 实际上在这个例子中我们并不使用它
 
-// 防止编译器优化
-volatile long long sum;
+// 一个简单的函数，进行一些计算，并使用volatile来避免编译器优化
+void simpleFunction() {
+    volatile int intVar = 0; // int 类型
+    volatile long long longVar = 0; // long long 类型
+    volatile float floatVar = 0.0f; // float 类型
+    volatile bool boolVar = false; // bool 类型
+    volatile char charVar = 'A'; // char 类型
 
-void compute_sum(const std::vector<int>& numbers) {
-    for (const auto& num : numbers) {
-        sum += num;
-    }
-}
-
-bool is_prime(int n) {
-    if (n <= 1) return false;
-    for (int i = 2; i <= std::sqrt(n); ++i) {
-        if (n % i == 0) return false;
-    }
-    return true;
-}
-
-void bubble_sort(std::vector<int>& numbers) {
-    int n = numbers.size();
-    for (int i = 0; i < n - 1; ++i) {
-        for (int j = 0; j < n - i - 1; ++j) {
-            if (numbers[j] > numbers[j + 1]) {
-                int temp = numbers[j];
-                numbers[j] = numbers[j + 1];
-                numbers[j + 1] = temp;
-            }
+    for (volatile int i = 0; i < 1000000; ++i) {
+        // 对int类型执行多次操作
+        for (volatile int j = 0; j < 5; ++j) {
+            intVar += i;
         }
+
+        // 对long long类型执行中等次数的操作
+        longVar += i * 2LL;
+
+        // 对float类型执行较少的操作
+        floatVar += static_cast<float>(i) / 2.0f;
+
+        // 对bool类型执行单次操作
+        boolVar = !boolVar;
+
+        // 对char类型执行单次操作
+        charVar = (char)((charVar - 'A' + 1) % 26 + 'A'); // 简单地循环遍历A到Z
+
+        // 进行一些无用的运算以消耗更多CPU时间
+        volatile int temp = intVar * longVar + static_cast<int>(floatVar);
     }
+
+    // 注意：这里我们并没有使用这些变量的值，因为我们只关心执行时间
 }
 
-void dummy_function(int a, int b, int c) {
-    int result = a + b * c;
-    if (result % 2 == 0) {
-        sum += result;
-    } else {
-        sum -= result;
-    }
-}
-
+// 主函数
 int main() {
-    std::vector<int> numbers;
-    for (int i = 1; i <= 1000; ++i) {
-        numbers.push_back(i);
-    }
+    // 调用函数
+    simpleFunction();
 
-    sum = 0;
-
-    // 条件语句
-    if (!numbers.empty()) {
-        compute_sum(numbers);
-    }
-
-    // 使用while循环
-    int counter = 0;
-    while (counter < 10) {
-        counter++;
-        sum += counter;
-    }
-
-    // 使用do-while循环
-    int do_counter = 0;
-    do {
-        do_counter++;
-        sum += do_counter;
-    } while (do_counter < 10);
-
-    // 使用范围for循环
-    for (const auto& num : numbers) {
-        if (is_prime(num)) {
-            sum += num;
-        }
-    }
-
-    // 使用自定义冒泡排序
-    bubble_sort(numbers);
-
-    // 使用简单的递归函数
-    int recursive_sum = 0;
-    for (int i = 1; i <= 10; ++i) {
-        dummy_function(i, i+1, i+2);
-    }
-
+    // 返回0表示程序正常退出
     return 0;
 }

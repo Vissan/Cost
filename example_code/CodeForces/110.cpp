@@ -1,34 +1,19 @@
-//4195173   Jul 28, 2013 6:14:10 PM	fuwutu	 255B - Code Parsing	 GNU C++0x	Accepted	156 ms	2100 KB
+//4058132   Jul 13, 2013 10:10:07 AM	fuwutu	 322A - Ciel and Dancing	 GNU C++0x	Accepted	 15 ms	 0 KB
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    string s;
-    cin >> s;
-
-    int nx(0), ny(0);
-    for (char c : s)
+    int n, m;
+    cin >> n >> m;
+    cout << n + m - 1 << endl;
+    for (int i = 1; i <= m; ++i)
     {
-        if (c == 'x')
-        {
-            nx += 1;
-        }
-        else
-        {
-            ny += 1;
-        }
+        cout << "1 " << i << endl;
     }
-    if (nx > ny)
+    for (int i = 2; i <= n; ++i)
     {
-        s.assign(nx - ny, 'x');
+        cout << i << " 1" << endl;
     }
-    else
-    {
-        s.assign(ny - nx, 'y');
-    }
-    cout << s << endl;
-    return 0;
 }

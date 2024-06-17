@@ -1,31 +1,20 @@
-//4021898   Jul 4, 2013 8:08:38 PM	fuwutu	 268A - Games	 GNU C++0x	Accepted	15 ms	0 KB
+//4262082   Aug 10, 2013 7:07:20 PM	fuwutu	 336B - Vasily the Bear and Fly	 GNU C++0x	Accepted	 30 ms	 0 KB
 #include <iostream>
-#include <vector>
+#include <cmath>
+#include <iomanip>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
+    double m, R;
+    cin >> m >> R;
 
-    int number(0);
-    vector<int> h(n), a(n);
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> h[i] >> a[i];
-        for (int j = 0; j < i; ++j)
-        {
-            if (h[i] == a[j])
-            {
-                number += 1;
-            }
-            if (a[i] == h[j])
-            {
-                number += 1;
-            }
-        }
-    }
-    cout << number << endl;
+    double answer = (m * (m + 1) * (m + 2) / 3 - m) * 2;
+    answer += (sqrt(2.0) - 2) * ((m * m - m) + (m * m - m - (m - 1) * 2));
+    answer /= (m * m);
+
+    answer *= R;
+    cout << setprecision(7) << answer << endl;
     return 0;
 }

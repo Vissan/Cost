@@ -1,36 +1,31 @@
-//4592917	 Sep 28, 2013 4:40:12 AM	fuwutu	 342A - Xenia and Divisors	 GNU C++0x	Accepted	62 ms	0 KB
-#include <cstdio>
+//4033968   Jul 7, 2013 12:59:41 PM	fuwutu	 262A - Roma and Lucky Numbers	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 int main()
 {
-    int n, x, count[8] = {0};
-    scanf("%d", &n);
-    for (int i = 0; i < n; ++i)
-    {
-        scanf("%d", &x);
-        count[x] += 1;
-    }
+    int n, k, count(0);
+    cin >> n >> k;
 
-    bool solution;
-    if (count[5] == 0 && count[7] == 0 && count[2] >= count[4] && count[1] == count[4] + count[6] && count[2] + count[3] == count[4] + count[6])
+    string s;
+    while (n--)
     {
-        for (int i = 0; i < count[4]; ++i)
+        int lucky(0);
+        cin >> s;
+        for (size_t i = 0; i < s.length(); ++i)
         {
-            printf("1 2 4\n");
+            if (s[i] == '4' || s[i] == '7')
+            {
+                lucky += 1;
+            }
         }
-        count[2] -= count[4];
-        for (int i = 0; i < count[2]; ++i)
+        if (lucky <= k)
         {
-            printf("1 2 6\n");
-        }
-        for (int i = 0; i < count[3]; ++i)
-        {
-            printf("1 3 6\n");
+            count += 1;
         }
     }
-    else
-    {
-        printf("-1\n");
-    }
+    cout << count << endl;
     return 0;
 }

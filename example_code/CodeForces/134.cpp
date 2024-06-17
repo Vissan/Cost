@@ -1,33 +1,28 @@
-//4265639   Aug 11, 2013 3:54:36 PM	fuwutu	 272B - Dima and Sequence	 GNU C++0x	Accepted	62 ms	0 KB
-#include <cstdio>
+//4263357   Aug 11, 2013 5:15:57 AM 	fuwutu 	34B - Sale 	GNU C++0x 	Accepted 	30 ms 	0 KB
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-int bitcount(int n) 
-{ 
-    n = (n & 0x55555555) + ((n >> 1) & 0x55555555) ; 
-    n = (n & 0x33333333) + ((n >> 2) & 0x33333333) ; 
-    n = (n & 0x0f0f0f0f) + ((n >> 4) & 0x0f0f0f0f) ; 
-    n = (n & 0x00ff00ff) + ((n >> 8) & 0x00ff00ff) ; 
-    n = (n & 0x0000ffff) + ((n >> 16) & 0x0000ffff) ; 
-    return n ; 
-}
-
 int main()
 {
-    int n, a, c[32] = {0};
-    scanf("%d", &n);
-    while (n--)
+    int n, m, a[100];
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i)
     {
-        scanf("%d", &a);
-        c[bitcount(a)] += 1;
+        cin >> a[i];
     }
+    sort(a, a + n);
 
-    long long answer = 0;
-    for (size_t i = 0; i < sizeof(c) / sizeof(c[0]); ++i)
+    int s(0);
+    for (int i = 0; i < m; ++i)
     {
-        answer += static_cast<long long>(c[i]) * static_cast<long long>(c[i] - 1) / 2;
+        if (a[i] >= 0)
+        {
+            break;
+        }
+        s += a[i];
     }
-    printf("%I64d\n", answer);
+    cout << -s << endl;
     return 0;
 }

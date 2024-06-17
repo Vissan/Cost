@@ -1,21 +1,30 @@
-//4033063   Jul 7, 2013 7:36:19 AM	fuwutu	 285A - Slightly Decreasing Permutations	 GNU C++0x	Accepted	31 ms	0 KB
-#include <cstdio>
+//4076800   Jul 15, 2013 9:04:58 PM	fuwutu	 4C - Registration System	 GNU C++0x	Accepted	 578 ms	 900 KB
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
 
 int main()
 {
-    int n, k;
-    scanf("%d%d", &n, &k);
+    int n;
+    cin >> n;
 
-    for (int i = 0; i < k; ++i)
+    map<string, int> database;
+    string s;
+    while (n--)
     {
-        printf("%d ", n - i);
+        cin >> s;
+        if (database.count(s) == 0)
+        {
+            cout << "OK" << endl;
+            database[s] = 1;
+        }
+        else
+        {
+            cout << s << database[s] << endl;
+            database[s] += 1;
+        }
     }
-    printf("1");
-    for (int i = 2; i <= n - k; ++i)
-    {
-        printf(" %d", i);
-    }
-    printf("\n");
-
     return 0;
 }

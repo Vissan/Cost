@@ -1,33 +1,24 @@
-//4239012   Aug 7, 2013 10:06:36 AM	fuwutu	 4B - Before an Exam	 GNU C++0x	Accepted	 30 ms	 0 KB
-#include <cstdio>
-#include <numeric>
-#include <algorithm>
+//4022146   Jul 4, 2013 8:34:23 PM	fuwutu	 271A - Beautiful Year	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
 
 using namespace std;
 
 int main()
 {
-    int d, sumTime, minTime[30], maxTime[30];
-    scanf("%d%d", &d, &sumTime);
-    for (int i = 0; i < d; ++i)
+    int y;
+    cin >> y;
+    while (true)
     {
-        scanf("%d%d", &minTime[i], &maxTime[i]);
-    }
-    int minTimeSum = accumulate(minTime, minTime + d, 0);
-    int maxTimeSum = accumulate(maxTime, maxTime + d, 0);
-    if (minTimeSum <= sumTime && sumTime <= maxTimeSum)
-    {
-        printf("YES\n");
-        for (int i = 0; i < d; ++i)
+        y += 1;
+        int a = y / 1000;
+        int b = y / 100 % 10;
+        int c = y / 10 % 10;
+        int d = y % 10;
+        if (a != b && a != c && a != d && b != c && b != d && c != d)
         {
-            int t = min(minTime[i] + sumTime - minTimeSum, maxTime[i]);
-            printf((i + 1 < d ? "%d " : "%d\n"), t);
-            sumTime -= (t - minTime[i]);
+            break;
         }
     }
-    else
-    {
-        printf("NO\n");
-    }
+    cout << y << endl;
     return 0;
 }

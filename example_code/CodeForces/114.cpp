@@ -1,18 +1,35 @@
-//4035330   Jul 7, 2013 7:30:59 PM	fuwutu	 259B - Little Elephant and Magic Square	 GNU C++0x	Accepted	15 ms	0 KB
-#include <iostream>
+//4265527   Aug 11, 2013 3:28:43 PM	fuwutu	 32A - Reconnaissance	 GNU C++0x	Accepted	 30 ms	 0 KB
+#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
-    int x11, x12, x13, x21, x22, x23, x31, x32, x33;
-    cin >> x11 >> x12 >> x13 >> x21 >> x22 >> x23 >> x31 >> x32 >> x33;
-    int sum = (x12 + x13 + x21 + x23 + x31 + x32) / 2;
-    x11 = sum - x12 - x13;
-    x22 = sum - x21 - x23;
-    x33 = sum - x31 - x32;
-    cout << x11 << " " << x12 << " " << x13 << endl;
-    cout << x21 << " " << x22 << " " << x23 << endl;
-    cout << x31 << " " << x32 << " " << x33 << endl;
+    int n, d, height[1000];
+    scanf("%d%d", &n, &d);
+    for (int i = 0; i < n; ++i)
+    {
+        scanf("%d", &height[i]);
+    }
+
+    sort(height, height + n);
+
+    int i1 = 0, i2 = 1, ways = 0;
+    while (i2 < n)
+    {
+        if (height[i2] - height[i1] <= d)
+        {
+            ways += (i2 - i1);
+            ++i2;
+        }
+        else
+        {
+            ++i1;
+        }
+    }
+    ways *= 2;
+
+    printf("%d\n", ways);
     return 0;
 }

@@ -1,35 +1,23 @@
-//4057616   Jul 13, 2013 7:20:24 AM	fuwutu	 43A - Football	 GNU C++0x	Accepted	15 ms	0 KB
+//4032932   Jul 7, 2013 6:02:15 AM	fuwutu	 270A - Fancy Fence	 GNU C++0x	Accepted	15 ms	0 KB
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    int n, goal(0);
-    cin >> n;
-
-    string team, win;
-    while (n--)
+    int t, a;
+    cin >> t;
+    while (t--)
     {
-        if (goal != 0)
+        cin >> a;
+        if (360 % (180 - a) == 0)
         {
-            cin >> team;
-            if (team == win)
-            {
-                goal += 1;
-            }
-            else
-            {
-                goal -= 1;
-            }
+            cout << "YES" << endl;
         }
         else
         {
-            cin >> win;
-            goal = 1;
+            cout << "NO" << endl;
         }
     }
-    cout << win << endl;
     return 0;
 }

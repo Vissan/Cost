@@ -1,29 +1,24 @@
-//4027443   Jul 5, 2013 6:45:49 PM	fuwutu	 69A - Young Physicist	 GNU C++0x	Accepted	15 ms	0 KB
-#include <iostream>
-
-using namespace std;
+//4264920   Aug 11, 2013 12:53:46 PM	fuwutu	 11A - Increasing Sequence	 GNU C++0x	Accepted	 30 ms	 0 KB
+#include <cstdio>
 
 int main()
 {
-    int n, x, y, z, xsum(0), ysum(0), zsum(0);
-    cin >> n;
-
-    while (n--)
+    int n, d, b0, b, moves(0);
+    scanf("%d%d%d", &n, &d, &b0);
+    while (--n)
     {
-        cin >> x >> y >> z;
-        xsum += x;
-        ysum += y;
-        zsum += z;
+        scanf("%d", &b);
+        if (b <= b0)
+        {
+            int x = (b0 - b) / d + 1;
+            moves += x;
+            b0 = b + x * d;
+        }
+        else
+        {
+            b0 = b;
+        }
     }
-
-    if (xsum == 0 && ysum == 0 && zsum == 0)
-    {
-        cout << "YES" << endl;
-    }
-    else
-    {
-        cout << "NO" << endl;
-    }
-
+    printf("%d\n", moves);
     return 0;
 }
