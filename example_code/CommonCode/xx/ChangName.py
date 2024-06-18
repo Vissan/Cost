@@ -10,7 +10,7 @@ cpp_files = [f for f in os.listdir(directory_path) if f.endswith('.cpp')]
 cpp_files.sort()
 
 # Rename the files to a sequential naming scheme
-for index, filename in enumerate(cpp_files, start=25):
+for index, filename in enumerate(cpp_files, start=34):
     new_name = f"{index}.cpp"
     old_file = os.path.join(directory_path, filename)
     new_file = os.path.join(directory_path, new_name)
