@@ -101,7 +101,7 @@ def main(file_path):
     data.append(counts_row)
 
     # 将数据写入CSV文件
-    with open('statement_counts.csv', 'w', newline='') as csvfile:
+    with open('../statement_counts.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
         # 写入数据
@@ -115,5 +115,5 @@ if __name__ == '__main__':
     clang.cindex.Config.set_library_file(r'C:\Program Files\LLVM\bin\libclang.dll')
 
     # 替换为实际的C++文件路径
-    cpp_file_path = 'example.cpp'
+    cpp_file_path = '../example.cpp'
     main(cpp_file_path)
