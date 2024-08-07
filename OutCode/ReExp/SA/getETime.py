@@ -66,10 +66,11 @@ def main(directory_path, eTime_csv):
 if __name__ == '__main__':
     # 设置要处理的文件夹路径和输出CSV文件路径
 
-    directory_path = '/example_code/CommonCode'
+    directory_path = 'C:\\Users\\scnuer\\PycharmProjects\\Cost\\example_code\\CommonCode'
     # directory_path = 'F:\\vissan\\Cost\\example_code\\CommonCode'
     # macos
     # directory_path = '/Users/vissan/PycharmProjects/Cost/example_code/CommonCode'
     # output_csv = '/Users/vissan/PycharmProjects/Cost/OutCode/ReExp/eTime_csv_macos.csv'
-    output_csv = 'C:\\Users\\scnuer\\PycharmProjects\\Cost\\OutCode\\ReExp\\eTime_csv_windows.csv'
-    main(directory_path, output_csv)
+    for i in range(10):
+        output_csv = f'C:\\Users\\scnuer\\PycharmProjects\\Cost\\OutCode\\eTime_windows10\\eTime_csv_windows{i}.csv'
+        main(directory_path, output_csv)
