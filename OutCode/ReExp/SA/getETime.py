@@ -68,8 +68,9 @@ if __name__ == '__main__':
 
     directory_path = '/example_code/CommonCode'
     # directory_path = 'F:\\vissan\\Cost\\example_code\\CommonCode'
+    # output_csv = 'C:\\Users\\scnuer\\PycharmProjects\\Cost\\OutCode\\ReExp\\eTime_csv_windows.csv'
     # macos
-    # directory_path = '/Users/vissan/PycharmProjects/Cost/example_code/CommonCode'
-    # output_csv = '/Users/vissan/PycharmProjects/Cost/OutCode/ReExp/eTime_csv_macos.csv'
-    output_csv = 'C:\\Users\\scnuer\\PycharmProjects\\Cost\\OutCode\\ReExp\\eTime_csv_windows.csv'
-    main(directory_path, output_csv)
+    directory_path = '/Users/vissan/PycharmProjects/Cost/example_code/CommonCode'
+    for i in range(10):
+        output_csv = f'/Users/vissan/PycharmProjects/Cost/OutCode/eTime_mac/eTime_csv_macos{i}.csv'
+        main(directory_path, output_csv)
